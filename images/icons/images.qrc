@@ -1,0 +1,12 @@
+<RCC>
+  <qresource prefix="icons">
+    <file>close_btn.svg</file>
+    <file>import_icon.svg</file>
+    <file>max.svg</file>
+    <file>min.svg</file>
+    <file>norm.svg</file>
+    <file>window_icon.png</file>
+    <file>window_icon.svg</file>
+    <file>window_title_icon.png</file>
+  </qresource>
+</RCC>

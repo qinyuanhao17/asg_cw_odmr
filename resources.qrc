@@ -1,0 +1,22 @@
+<RCC>
+  <qresource prefix="my_icons">
+    <file>images/icons/picture.svg</file>
+    <file>images/icons/save.svg</file>
+    <file>images/icons/stop.svg</file>
+    <file>images/icons/play.svg</file>
+    <file>images/icons/download.svg</file>
+    <file>images/icons/init.svg</file>
+    <file>images/icons/connect.svg</file>
+    <file>images/icons/load.svg</file>
+    <file>images/icons/restore.svg</file>
+    <file>images/icons/close_btn.svg</file>
+    <file>images/icons/images.qrc</file>
+    <file>images/icons/import_icon.svg</file>
+    <file>images/icons/max.svg</file>
+    <file>images/icons/min.svg</file>
+    <file>images/icons/norm.svg</file>
+    <file>images/icons/window_icon.png</file>
+    <file>images/icons/window_icon.svg</file>
+    <file>images/icons/window_title_icon.png</file>
+  </qresource>
+</RCC>
