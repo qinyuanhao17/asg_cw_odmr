@@ -71,7 +71,7 @@ print(rtn)
 SetStopEdge = lib.SetStopEdge
 SetStopEdge.argtypes = [ctypes.c_int, ctypes.c_int, ctypes.c_int, ctypes.c_int]
 SetStopEdge.restype = ctypes.c_int
-rtn = SetStartEdge(DEV_ID_0, 0, FTMT_CHANNEL_0, FT10X0_INPUT_EDGE_RISE)
+rtn = SetStopEdge(DEV_ID_0, 0, FTMT_CHANNEL_0, FT10X0_INPUT_EDGE_RISE)
 print(rtn)
 
 '''Set stop impedence''' # CH1 defined only

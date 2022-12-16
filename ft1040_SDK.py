@@ -2,19 +2,42 @@ import os
 import platform
 import ctypes
 
-class ft1040_t3():
+DEV_ID_0 = ctypes.c_int(0)                                     # Device ID
+FTMT_TASK_RUN_MODE_T3 = ctypes.c_int(0x03)                     # T3 Mode
+FilePath = ctypes.c_char_p(b"D:\ODMRequipment\File")           # File path
+sTime = ctypes.c_float(10) # in second unit                    # Collecting time 
+FTMT_START_FREQ_DIV_1 = ctypes.c_int(1)                        # Frequency division time
+FTMT_FILE_SAVE_MODE_BIN = ctypes.c_int(1)                      # Binary file type
+FTMT_FILE_SAVE_MODE_TEXT = ctypes.c_int(2)                     # Text file type
+FTMT_FILE_SERIES_MODE_EACH = ctypes.c_int(0)                   # T1 Mode parameters(useless here)
+FTMT_TTTR_END_MODE_TIME = ctypes.c_int(0)                      # Time tagger mode end mode: collecting time
+FTMT_WIN_RES_PS_64 = ctypes.c_int(6)                           # Time resolution 64ps (best for T3 mode)
+GateWidth = ctypes.c_int(300) #In unit ns                      # Gate width: 300ns
+GateDelay = ctypes.c_int(0) #In unit ns                        # Gate delay: no delay
+FTMT_BOARD_A = ctypes.c_int(0)                                 # brd: 0 
+CH_MASK_0 = ctypes.c_int(0b0001)       
+print(CH_MASK_0)                        # CH1 mask number
+FT10X0_INPUT_EDGE_RISE = ctypes.c_int(0)                       # Positive trig slope
+FTMT_CHANNEL_0 = ctypes.c_int(0)                               # CH1
+FT10X0_INPUT_IMPEDENCE_HIGH = ctypes.c_int(0)                  # 1M Ohm impedence
+FT10X0_INPUT_IMPEDENCE_50 = ctypes.c_int(1)                    # 50 Ohm impedence
+FileSize = ctypes.c_int(500) # In unit M Bytes                 # Max file size 500 M Bytes
+
+class ft1040():
 
     def __init__(self):
+
+        '''Dynamically loading dll library'''   #This part can be replaced by __dll = ctypes.CDLL("absolute or relative location of the .dll file")
         wd = os.path.abspath(os.path.dirname(__file__))
         arch = platform.architecture()[0]
         dll_path = ""
         if arch == '64bit':
-            dll_path = os.path.join(wd, 'ft1040_dll\smncsftmt_x64.dll')
+            dll_path = os.path.join(wd, 'dll_ft1040\dll_x64\smncsftmt.dll')
             
-            print("smncsftmt_x64.dll dynamically loaded")
+            print("64 bit smncsftmt.dll is dynamically loaded")
         else:
-            dll_path = os.path.join(wd, 'ft1040_dll\smncsftmt_x86.dll')
-            print("smncsftmt_x86.dll dynamically loaded")
+            dll_path = os.path.join(wd, 'dll_ft1040\dll_x86\smncsftmt.dll')
+            print("32 bit smncsftmt.dll is dynamically loaded")
 
         if os.path.isfile(dll_path):
             self.__dll = ctypes.CDLL(dll_path)
@@ -23,6 +46,9 @@ class ft1040_t3():
         
         '''Define argtypes and restypes'''
         
+        self.__dll.GetDevType.argtypes = [ctypes.c_int, ctypes.c_char_p]
+        self.__dll.GetDevType.restype = ctypes.c_int
+
         self.__dll.USBConnected.argtypes = [ctypes.c_int]
         self.__dll.USBConnected.restype = ctypes.c_bool
 
@@ -50,7 +76,7 @@ class ft1040_t3():
         self.__dll.SetGateDelay.argtypes = [ctypes.c_int, ctypes.c_int]
         self.__dll.SetGateDelay.restype = ctypes.c_int
 
-        self.__dll.EnableTTTR.argtypes = [ctypes.c_int, ctypes.c_int, ctypes.c_int]
+        self.__dll.EnableTTTR.argtypes = [ctypes.c_int, ctypes.c_int, ctypes.c_uint8]
         self.__dll.EnableTTTR.restype = ctypes.c_int
 
         self.__dll.SetStatisticsTime.argtypes = [ctypes.c_int, ctypes.c_float]
@@ -76,74 +102,173 @@ class ft1040_t3():
 
         self.__dll.IsTaskCompleted.restype = ctypes.c_bool
 
-        def USBConnected(self):
-            '''Check USB connection'''
-            return self.__dll.USBConnected()
+    def GetDevType(self, devId = ctypes.c_int(), d_str = ctypes.c_char_p()):
+        '''Check if the device is FT1040'''
+        return hex(self.__dll.GetDevType(devId, d_str))
 
-        def SetTimeWindowRes(self):
-            '''Set time window resolution (best 64ps for T3)'''
-            return self.__dll.SetTimeWindowRes()
+    def USBConnected(self, devId = ctypes.c_int()):
+        '''Check USB connection'''
+        return self.__dll.USBConnected(devId)
 
-        def SetStartFreqDiv(self):
-            '''Set division frequency'''
-            return self.__dll.SetStartFreqDiv()
+    def SetTimeWindowRes(self, devId = ctypes.c_int(), winRes = ctypes.c_int()):
+        '''Set time window resolution (best 64ps for T3)'''
+        return self.__dll.SetTimeWindowRes(devId, winRes)
 
-        def SetGateHLWidth(self):
-            '''Set gate width'''
-            return self.__dll.SetGateHLWidth
+    def SetStartFreqDiv(self, devId = ctypes.c_int(), freqDiv = ctypes.c_int()):
+        '''Set division frequency'''
+        return self.__dll.SetStartFreqDiv(devId, freqDiv)
 
-        def SetStartEdge(self):
-            '''Set Start Edge'''
-            return self.__dll.SetStartEdge
+    def SetGateHLWidth(self, devId = ctypes.c_int(), width = ctypes.c_int()):
+        '''Set gate width'''
+        return self.__dll.SetGateHLWidth(devId, width)
 
-        def SetStartImpedence(self):
-            '''Set start impedence''' # impedence of the sync signal which ASG8100 is used
-            return self.__dll.SetStartImpedence
+    def SetStartEdge(self, devId = ctypes.c_int(), edge = ctypes.c_int()):
+        '''Set Start Edge'''
+        return self.__dll.SetStartEdge(devId, edge)
 
-        def SetStopEdge(self):
-            '''Set stop edge''' 
-            return self.__dll.SetStopEdge
+    def SetStartImpedence(self, devId = ctypes.c_int(), impedence = ctypes.c_int()):
+        '''Set start impedence''' # impedence of the sync signal which ASG8100 is used
+        return self.__dll.SetStartImpedence(devId, impedence)
 
-        def SetStopImpedence(self):
-            '''Set stop impedence'''
-            return self.__dll.SetStopImpedence
+    def SetStopEdge(self, devId = ctypes.c_int(), brd = ctypes.c_int(), chl = ctypes.c_int(), edge = ctypes.c_int()):
+        '''Set stop edge''' 
+        return self.__dll.SetStopEdge(devId, brd, chl, edge)
 
-        def SetGateDelay(self):
-            '''Set the gate delay (from the sync signal)'''
-            return self.__dll.SetGateDelay
+    def SetStopImpedence(self, devId = ctypes.c_int(), brd = ctypes.c_int(), chl = ctypes.c_int(), impedence = ctypes.c_int()):
+        '''Set stop impedence'''
+        return self.__dll.SetStopImpedence(devId, brd, chl, impedence)
 
-        def EnableTTTR(self):
-            '''Enable TTTR mode''' # 0001二进制数据打开CH1 0010打开CH2...; 0011打开CH1 CH2; 0101打开CH1 CH3...以此类推
-            return self.__dll.EnableTTTR()
+    def SetGateDelay(self, devId = ctypes.c_int(), delay = ctypes.c_int()):
+        '''Set the gate delay (from the sync signal)'''
+        return self.__dll.SetGateDelay(devId, delay)
 
-        def SetStatisticsTime(self):
-            '''Set statistics timespan'''
-            return self.__dll.SetStatisticsTime
+    def EnableTTTR(self, devId = ctypes.c_int(), brd = ctypes.c_int(), mask8 = ctypes.c_uint8()):
+        '''Enable TTTR mode''' # 0001二进制数据打开CH1 0010打开CH2...; 0011打开CH1 CH2; 0101打开CH1 CH3...以此类推
+        return self.__dll.EnableTTTR(devId, brd, mask8)
 
-        def SetFilePath(self):
-            '''Set file storation path'''
-            return self.__dll.SetFilePath()
+    def SetStatisticsTime(self, rMode = ctypes.c_int(), sTime = ctypes.c_float()):
+        '''Set statistics timespan'''
+        return self.__dll.SetStatisticsTime(rMode, sTime)
 
-        def SetFileMode(self):
-            '''Set file mode (.txt or binary) '''
-            return self.__dll.SetFileMode()
+    def SetFilePath(self, devId = ctypes.c_int(), rMode = ctypes.c_int(), path = ctypes.c_char_p()):
+        '''Set file storation path'''
+        return self.__dll.SetFilePath(devId, rMode, path)
 
-        def SetMaxFileSize(self):
-            '''Set Max File storage Size, i.e. splitted file sizes'''
-            return self.__dll.SetMaxFileSize()
+    def SetFileMode(self, rMode = ctypes.c_int(), sMode = ctypes.c_int(), fMode = ctypes.c_int()):
+        '''Set file mode (.txt or binary) '''
+        return self.__dll.SetFileMode(rMode, sMode, fMode)
 
-        def SetTTTREndMode(self):
-            '''Set event end mode time or counts'''
-            return self.__dll.SetTTTREndMode()
+    def SetMaxFileSize(self, size = ctypes.c_int()):
+        '''Set Max File storage Size, i.e. splitted file sizes''' # Size has unit Mega Bytes
+        return self.__dll.SetMaxFileSize(size)
 
-        def StartTask(self):
-            '''Define start task function'''
-            return self.__dll.StartTask()
 
-        def StopTask(self):
-            '''Define stop task function'''
-            return self.__dll.StopTask()
+    def SetTTTREndMode(self, eMode = ctypes.c_int()):
+        '''Set event end mode time or counts''' # Only time end mode is considered here, which is eMode = 0
+        return self.__dll.SetTTTREndMode(eMode)
 
-        def IsTaskCompleted(self):
-            '''Check if task is completed'''
-            return self.__dll.IsTaskCompleted()
+    def StartTask(self, rMode = ctypes.c_int()):
+        '''Define start task function'''
+        return self.__dll.StartTask(rMode)
+
+    def StopTask(self, rMode = ctypes.c_int()):
+        '''Define stop task function'''
+        return self.__dll.StopTask(rMode)
+
+    def IsTaskCompleted(self):
+        '''Check if task is completed'''
+        return self.__dll.IsTaskCompleted()
+
+    '''
+    Functions that are not defined here:
+    SetBlockedWindow
+    SetStartThreshold
+    SetStopThreshold
+    SetStopDelay
+    SetPulseCycle
+    GetRunMode
+    GetSignalStatus
+    GetDllVersion
+    GetFilePath
+    SetMaxBarValue
+    SetT1Interval
+    EnableT1
+    EnableT3T1
+    GetT1Data
+    GetT1Status
+    GetElapsedTime
+    EnableITTR
+    SetITTRInterval
+    SetITTREndMode
+    GetActualEvents
+    SetMemoryDataMode
+    MemoryDataModeEnabled
+    GetMemoryData
+    ReleaseMemoryData
+    dmtch_Initialize
+    dmtch_AddStrategy
+    dmtch_GetStratgyCount
+    dmtch_GetChlCount
+    dmtch_GetChlData
+    MarkMainDevice
+    EnableConcurrentMode
+    '''
+
+if __name__ == "__main__":
+    dev = ft1040()
+    type = type(dev.GetDevType(0, ctypes.c_char_p(b"my dev")))
+    print(type)
+
+    rtn = dev.USBConnected(0)
+    print(rtn)
+
+    rtn = dev.SetTimeWindowRes(DEV_ID_0, FTMT_WIN_RES_PS_64)
+    print(rtn)
+
+    rtn = dev.SetStartFreqDiv(DEV_ID_0, FTMT_START_FREQ_DIV_1)
+    print(rtn)
+
+    rtn = dev.SetGateHLWidth(DEV_ID_0, GateWidth)
+    print(rtn)
+
+    rtn = dev.SetStartEdge(DEV_ID_0, FT10X0_INPUT_EDGE_RISE)
+    print(rtn)
+        
+    rtn = dev.SetStartImpedence(DEV_ID_0, FT10X0_INPUT_IMPEDENCE_50)
+    print(rtn)
+
+    rtn = dev.SetStopEdge(DEV_ID_0, 0, FTMT_CHANNEL_0, FT10X0_INPUT_EDGE_RISE)
+    print(rtn)
+
+    rtn = dev.SetStopImpedence(DEV_ID_0, 0, FTMT_CHANNEL_0, FT10X0_INPUT_IMPEDENCE_HIGH)
+    print(rtn)
+
+    rtn = dev.SetGateDelay(DEV_ID_0, GateDelay)
+    print(rtn)
+
+    rtn = dev.EnableTTTR(DEV_ID_0, FTMT_BOARD_A, CH_MASK_0)
+    print(rtn)
+
+    rtn = dev.SetStatisticsTime(FTMT_TASK_RUN_MODE_T3, sTime)
+    print(rtn)
+
+    rtn = dev.SetFilePath(DEV_ID_0, FTMT_TASK_RUN_MODE_T3, FilePath)
+    print(rtn)
+
+    rtn = dev.SetFileMode(FTMT_TASK_RUN_MODE_T3, FTMT_FILE_SAVE_MODE_TEXT, FTMT_FILE_SERIES_MODE_EACH)
+    print(rtn)
+
+    rtn = dev.SetMaxFileSize(FileSize)
+    print(rtn)
+
+    rtn = dev.SetTTTREndMode(FTMT_TTTR_END_MODE_TIME)
+    print(rtn)
+
+    rtn = dev.StartTask(FTMT_TASK_RUN_MODE_T3)
+    print(rtn)
+
+while True:
+    if dev.IsTaskCompleted() ==True:
+        rtn = dev.StopTask(FTMT_TASK_RUN_MODE_T3)
+        print('Task completed: {}'.format(rtn))
+        break
