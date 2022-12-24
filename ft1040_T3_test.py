@@ -1,5 +1,21 @@
 import ctypes
-lib = ctypes.CDLL('D:\ODMRequipment\dll_versatile\env_bit64\smncsftmt.dll')
+import os
+import platform
+wd = os.path.abspath(os.path.dirname(__file__))
+arch = platform.architecture()[0]
+dll_path = ""
+if arch == '64bit':
+    dll_path = os.path.join(wd, 'dll_ft1040\dll_x64\smncsftmt.dll')
+    
+    print("64 bit smncsftmt.dll is dynamically loaded")
+else:
+    dll_path = os.path.join(wd, 'dll_ft1040\dll_x86\smncsftmt.dll')
+    print("32 bit smncsftmt.dll is dynamically loaded")
+
+if os.path.isfile(dll_path):
+    lib = ctypes.CDLL(dll_path)
+else:
+    raise Exception("Can not found dll")
 
 '''Define macro instruction'''
 DEV_ID_0 = ctypes.c_int(0)                                     # Device ID
@@ -20,7 +36,7 @@ FT10X0_INPUT_EDGE_RISE = ctypes.c_int(0)                       # Positive trig s
 FTMT_CHANNEL_0 = ctypes.c_int(0)                               # CH1
 FT10X0_INPUT_IMPEDENCE_HIGH = ctypes.c_int(0)                  # 1M Ohm impedence
 FT10X0_INPUT_IMPEDENCE_50 = ctypes.c_int(1)                    # 50 Ohm impedence
-FileSize = ctypes.c_int(500) # In unit M Bytes                 # Max file size 500 M Bytes
+FileSize = ctypes.c_int(50) # In unit M Bytes                  # Max file size 500 M Bytes
 
 print(FTMT_TASK_RUN_MODE_T3.value)
 print(FilePath.value)
@@ -119,9 +135,9 @@ print(rtn)
 
 '''设置SetMaxFileSize'''
 SetMaxFileSize = lib.SetMaxFileSize
-SetMaxFileSize.argtypes = [ctypes.c_int]
+SetMaxFileSize.argtypes = [ctypes.c_int, ctypes.c_int]
 SetMaxFileSize.restype = ctypes.c_int
-rtn = SetMaxFileSize(FileSize)
+rtn = SetMaxFileSize(DEV_ID_0, FileSize)
 print(rtn)
 
 '''Set event end mode time or counts'''
