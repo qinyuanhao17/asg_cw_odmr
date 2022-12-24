@@ -7,10 +7,10 @@ import socket
 import pyvisa
 import numpy as np
 import matplotlib.pyplot as plt
-from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
-
-from awg4100 import AwgDevice
 import asg_cw_odmr_ui
+# from ft1040_SDK import *
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+from awg4100 import AwgDevice
 from PyQt5.QtGui import QIcon, QPixmap, QCursor, QMouseEvent, QColor, QFont
 from PyQt5.QtCore import Qt, QThread, pyqtSignal, QPoint
 from PyQt5.QtWidgets import QWidget, QApplication, QGraphicsDropShadowEffect, QVBoxLayout, QLabel, QFileDialog, QDesktopWidget
@@ -25,7 +25,7 @@ class MyWindow(asg_cw_odmr_ui.Ui_Form, QWidget):
 
         # init UI
         self.setupUi(self)
-        ui_width = int(QDesktopWidget().availableGeometry().size().width()*0.65)
+        ui_width = int(QDesktopWidget().availableGeometry().size().width()*0.75)
         ui_height = int(QDesktopWidget().availableGeometry().size().height()*0.72)
         self.resize(ui_width, ui_height)
         center_pointer = QDesktopWidget().availableGeometry().center()
@@ -278,7 +278,10 @@ class MyWindow(asg_cw_odmr_ui.Ui_Form, QWidget):
             else:
                 self.rf_info_msg.emit('RF OFF failed')
                 sys.emit()
-        
+    '''
+    FT1040 control
+    '''    
+    
     '''
     ASG CONTROL
     '''

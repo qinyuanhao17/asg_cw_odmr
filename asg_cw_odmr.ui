@@ -33,16 +33,24 @@ QFrame#mainframe{
 	border-radius:10px;
 }
 QGroupBox{
-	border-width: 2px;	
+	border-width: 2px;
+	
+	font: 25 9pt &quot;Microsoft YaHei UI Light&quot;;
 }
 QPushButton{
 	background-color: rgb(255, 255, 255);
 	border-radius: 2px;
 	border: 1px groove gray;
+	font: 63 9pt &quot;Nunito Sans SemiBold&quot;;
 }
-</string>
+QTabWidget{
+	font: 63 9pt &quot;Nunito Sans SemiBold&quot;;
+}
+QLabel{
+	font: 9pt &quot;Microsoft YaHei UI&quot;;
+}</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout">
+  <layout class="QHBoxLayout" name="horizontalLayout_6">
    <property name="leftMargin">
     <number>30</number>
    </property>
@@ -55,7 +63,7 @@ QPushButton{
    <property name="bottomMargin">
     <number>30</number>
    </property>
-   <item row="0" column="0">
+   <item>
     <widget class="QWidget" name="mainwidget" native="true">
      <property name="styleSheet">
       <string notr="true"/>
@@ -168,7 +176,7 @@ QPushButton{
               </property>
               <property name="font">
                <font>
-                <family>Microsoft JhengHei UI</family>
+                <family>Microsoft YaHei UI</family>
                 <pointsize>9</pointsize>
                 <weight>50</weight>
                 <italic>false</italic>
@@ -323,9 +331,7 @@ QPushButton:pressed {
             </sizepolicy>
            </property>
            <property name="styleSheet">
-            <string notr="true">font: 63 9pt &quot;Nunito Sans SemiBold&quot;;
-
-</string>
+            <string notr="true"/>
            </property>
            <property name="frameShape">
             <enum>QFrame::StyledPanel</enum>
@@ -383,8 +389,597 @@ QPushButton:pressed {
                   <string notr="true"/>
                  </property>
                  <property name="title">
-                  <string>ASG Control Panel</string>
+                  <string>TCSPC-T3MODE Control Panel</string>
                  </property>
+                 <layout class="QVBoxLayout" name="verticalLayout_3">
+                  <item>
+                   <layout class="QHBoxLayout" name="horizontalLayout_7" stretch="1,1">
+                    <item>
+                     <widget class="QTabWidget" name="tabWidget">
+                      <property name="currentIndex">
+                       <number>1</number>
+                      </property>
+                      <property name="usesScrollButtons">
+                       <bool>false</bool>
+                      </property>
+                      <property name="documentMode">
+                       <bool>false</bool>
+                      </property>
+                      <property name="movable">
+                       <bool>false</bool>
+                      </property>
+                      <property name="tabBarAutoHide">
+                       <bool>false</bool>
+                      </property>
+                      <widget class="QWidget" name="res">
+                       <attribute name="title">
+                        <string>Basic</string>
+                       </attribute>
+                       <layout class="QHBoxLayout" name="horizontalLayout_5">
+                        <item>
+                         <layout class="QVBoxLayout" name="verticalLayout_6">
+                          <item>
+                           <widget class="QLabel" name="label_3">
+                            <property name="text">
+                             <string>Resolution:</string>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QLabel" name="label_7">
+                            <property name="text">
+                             <string>Freq Division:</string>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QLabel" name="label_8">
+                            <property name="text">
+                             <string>Gate Delay:</string>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QLabel" name="label_9">
+                            <property name="text">
+                             <string>Gate Width:</string>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
+                        </item>
+                        <item>
+                         <layout class="QVBoxLayout" name="verticalLayout_8">
+                          <item>
+                           <widget class="QComboBox" name="comboBox"/>
+                          </item>
+                          <item>
+                           <widget class="QComboBox" name="comboBox_2"/>
+                          </item>
+                          <item>
+                           <widget class="QLineEdit" name="lineEdit"/>
+                          </item>
+                          <item>
+                           <widget class="QLineEdit" name="lineEdit_2"/>
+                          </item>
+                         </layout>
+                        </item>
+                        <item>
+                         <layout class="QVBoxLayout" name="verticalLayout_9">
+                          <item>
+                           <widget class="QLabel" name="label_6">
+                            <property name="text">
+                             <string>(ps)</string>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QLabel" name="label_20">
+                            <property name="text">
+                             <string> </string>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QLabel" name="label_10">
+                            <property name="text">
+                             <string>(ns)</string>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QLabel" name="label_11">
+                            <property name="text">
+                             <string>(ns)</string>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
+                        </item>
+                       </layout>
+                      </widget>
+                      <widget class="QWidget" name="trig">
+                       <attribute name="title">
+                        <string> Trig </string>
+                       </attribute>
+                       <layout class="QHBoxLayout" name="horizontalLayout_4">
+                        <item>
+                         <widget class="QFrame" name="frame_7">
+                          <property name="frameShape">
+                           <enum>QFrame::StyledPanel</enum>
+                          </property>
+                          <property name="frameShadow">
+                           <enum>QFrame::Raised</enum>
+                          </property>
+                          <layout class="QHBoxLayout" name="horizontalLayout_8" stretch="1,3,3">
+                           <property name="spacing">
+                            <number>5</number>
+                           </property>
+                           <property name="leftMargin">
+                            <number>0</number>
+                           </property>
+                           <property name="topMargin">
+                            <number>0</number>
+                           </property>
+                           <property name="rightMargin">
+                            <number>0</number>
+                           </property>
+                           <property name="bottomMargin">
+                            <number>0</number>
+                           </property>
+                           <item>
+                            <layout class="QVBoxLayout" name="verticalLayout_16">
+                             <item>
+                              <widget class="QLabel" name="label_19">
+                               <property name="text">
+                                <string/>
+                               </property>
+                              </widget>
+                             </item>
+                             <item>
+                              <widget class="QLabel" name="label_12">
+                               <property name="text">
+                                <string>SYNC:</string>
+                               </property>
+                              </widget>
+                             </item>
+                             <item>
+                              <widget class="QLabel" name="label_13">
+                               <property name="text">
+                                <string> CH1:</string>
+                               </property>
+                              </widget>
+                             </item>
+                             <item>
+                              <widget class="QLabel" name="label_14">
+                               <property name="text">
+                                <string> CH2:</string>
+                               </property>
+                              </widget>
+                             </item>
+                             <item>
+                              <widget class="QLabel" name="label_15">
+                               <property name="text">
+                                <string> CH3:</string>
+                               </property>
+                              </widget>
+                             </item>
+                             <item>
+                              <widget class="QLabel" name="label_16">
+                               <property name="text">
+                                <string> CH4:</string>
+                               </property>
+                              </widget>
+                             </item>
+                            </layout>
+                           </item>
+                           <item>
+                            <layout class="QVBoxLayout" name="verticalLayout_15">
+                             <item>
+                              <widget class="QLabel" name="label_18">
+                               <property name="text">
+                                <string>Impedence</string>
+                               </property>
+                              </widget>
+                             </item>
+                             <item>
+                              <widget class="QComboBox" name="comboBox_8"/>
+                             </item>
+                             <item>
+                              <widget class="QComboBox" name="comboBox_9"/>
+                             </item>
+                             <item>
+                              <widget class="QComboBox" name="comboBox_10"/>
+                             </item>
+                             <item>
+                              <widget class="QComboBox" name="comboBox_11"/>
+                             </item>
+                             <item>
+                              <widget class="QComboBox" name="comboBox_12"/>
+                             </item>
+                            </layout>
+                           </item>
+                           <item>
+                            <layout class="QVBoxLayout" name="verticalLayout_14">
+                             <item>
+                              <widget class="QLabel" name="label_17">
+                               <property name="text">
+                                <string>Trig Mode</string>
+                               </property>
+                              </widget>
+                             </item>
+                             <item>
+                              <widget class="QComboBox" name="comboBox_3"/>
+                             </item>
+                             <item>
+                              <widget class="QComboBox" name="comboBox_4"/>
+                             </item>
+                             <item>
+                              <widget class="QComboBox" name="comboBox_5"/>
+                             </item>
+                             <item>
+                              <widget class="QComboBox" name="comboBox_6"/>
+                             </item>
+                             <item>
+                              <widget class="QComboBox" name="comboBox_7"/>
+                             </item>
+                            </layout>
+                           </item>
+                          </layout>
+                         </widget>
+                        </item>
+                       </layout>
+                      </widget>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QGroupBox" name="groupBox_8">
+                      <property name="title">
+                       <string>File Manipulation</string>
+                      </property>
+                      <layout class="QVBoxLayout" name="verticalLayout_4">
+                       <item>
+                        <layout class="QHBoxLayout" name="horizontalLayout_14">
+                         <item>
+                          <widget class="QLabel" name="label_25">
+                           <property name="text">
+                            <string>Save To:</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QLineEdit" name="lineEdit_5"/>
+                         </item>
+                         <item>
+                          <widget class="QPushButton" name="pushButton_3">
+                           <property name="text">
+                            <string/>
+                           </property>
+                           <property name="icon">
+                            <iconset resource="resources.qrc">
+                             <normaloff>:/my_icons/images/icons/import_icon.svg</normaloff>:/my_icons/images/icons/import_icon.svg</iconset>
+                           </property>
+                          </widget>
+                         </item>
+                        </layout>
+                       </item>
+                       <item>
+                        <layout class="QHBoxLayout" name="horizontalLayout_15">
+                         <item>
+                          <widget class="QCheckBox" name="checkBox_7">
+                           <property name="text">
+                            <string>Save As BIN</string>
+                           </property>
+                           <attribute name="buttonGroup">
+                            <string notr="true">file_ck_group</string>
+                           </attribute>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QCheckBox" name="checkBox_8">
+                           <property name="text">
+                            <string>Save As TXT</string>
+                           </property>
+                           <attribute name="buttonGroup">
+                            <string notr="true">file_ck_group</string>
+                           </attribute>
+                          </widget>
+                         </item>
+                        </layout>
+                       </item>
+                       <item>
+                        <widget class="Line" name="line_2">
+                         <property name="orientation">
+                          <enum>Qt::Horizontal</enum>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QCheckBox" name="checkBox_10">
+                         <property name="text">
+                          <string>Split File</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <layout class="QHBoxLayout" name="horizontalLayout_16" stretch="2,6,1">
+                         <item>
+                          <widget class="QLabel" name="label_27">
+                           <property name="text">
+                            <string>Split size:</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QComboBox" name="comboBox_13"/>
+                         </item>
+                         <item>
+                          <widget class="QLabel" name="label_28">
+                           <property name="text">
+                            <string>(Mbytes)</string>
+                           </property>
+                          </widget>
+                         </item>
+                        </layout>
+                       </item>
+                       <item>
+                        <widget class="Line" name="line_3">
+                         <property name="orientation">
+                          <enum>Qt::Horizontal</enum>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QLabel" name="label_26">
+                         <property name="text">
+                          <string>File Location:</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <layout class="QHBoxLayout" name="horizontalLayout_17">
+                         <item>
+                          <widget class="QLineEdit" name="lineEdit_6"/>
+                         </item>
+                         <item>
+                          <widget class="QPushButton" name="pushButton_4">
+                           <property name="text">
+                            <string>Open Folder</string>
+                           </property>
+                          </widget>
+                         </item>
+                        </layout>
+                       </item>
+                      </layout>
+                     </widget>
+                    </item>
+                   </layout>
+                  </item>
+                  <item>
+                   <layout class="QHBoxLayout" name="horizontalLayout_13">
+                    <item>
+                     <widget class="QGroupBox" name="groupBox_9">
+                      <property name="title">
+                       <string>Stop Mode</string>
+                      </property>
+                      <layout class="QHBoxLayout" name="horizontalLayout_12">
+                       <property name="spacing">
+                        <number>5</number>
+                       </property>
+                       <property name="leftMargin">
+                        <number>5</number>
+                       </property>
+                       <property name="topMargin">
+                        <number>5</number>
+                       </property>
+                       <property name="rightMargin">
+                        <number>5</number>
+                       </property>
+                       <property name="bottomMargin">
+                        <number>5</number>
+                       </property>
+                       <item>
+                        <layout class="QGridLayout" name="gridLayout">
+                         <item row="0" column="0">
+                          <widget class="QCheckBox" name="checkBox">
+                           <property name="text">
+                            <string>Time STP</string>
+                           </property>
+                           <attribute name="buttonGroup">
+                            <string notr="true">stp_mode_ck_group</string>
+                           </attribute>
+                          </widget>
+                         </item>
+                         <item row="1" column="0">
+                          <widget class="QLabel" name="label_21">
+                           <property name="text">
+                            <string>sTime (s):</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item row="1" column="1">
+                          <widget class="QLineEdit" name="lineEdit_3"/>
+                         </item>
+                         <item row="2" column="0">
+                          <widget class="QLabel" name="label_22">
+                           <property name="text">
+                            <string>Progress:</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item row="2" column="1">
+                          <widget class="QProgressBar" name="progressBar">
+                           <property name="value">
+                            <number>24</number>
+                           </property>
+                          </widget>
+                         </item>
+                        </layout>
+                       </item>
+                       <item>
+                        <widget class="Line" name="line">
+                         <property name="frameShadow">
+                          <enum>QFrame::Plain</enum>
+                         </property>
+                         <property name="lineWidth">
+                          <number>1</number>
+                         </property>
+                         <property name="orientation">
+                          <enum>Qt::Vertical</enum>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <layout class="QGridLayout" name="gridLayout_6">
+                         <item row="0" column="0">
+                          <widget class="QCheckBox" name="checkBox_2">
+                           <property name="text">
+                            <string>Event STP</string>
+                           </property>
+                           <attribute name="buttonGroup">
+                            <string notr="true">stp_mode_ck_group</string>
+                           </attribute>
+                          </widget>
+                         </item>
+                         <item row="1" column="0">
+                          <widget class="QLabel" name="label_24">
+                           <property name="text">
+                            <string>eCounts:</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item row="1" column="1">
+                          <widget class="QLineEdit" name="lineEdit_4"/>
+                         </item>
+                         <item row="2" column="0">
+                          <widget class="QLabel" name="label_23">
+                           <property name="text">
+                            <string>Progress:</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item row="2" column="1">
+                          <widget class="QProgressBar" name="progressBar_2">
+                           <property name="value">
+                            <number>24</number>
+                           </property>
+                          </widget>
+                         </item>
+                        </layout>
+                       </item>
+                      </layout>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QGroupBox" name="groupBox_5">
+                      <property name="title">
+                       <string>Input Channel</string>
+                      </property>
+                      <layout class="QGridLayout" name="gridLayout_7">
+                       <item row="0" column="0">
+                        <widget class="QCheckBox" name="checkBox_3">
+                         <property name="text">
+                          <string>CH1</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="0" column="1">
+                        <widget class="QCheckBox" name="checkBox_5">
+                         <property name="text">
+                          <string>CH3</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="1" column="0">
+                        <widget class="QCheckBox" name="checkBox_4">
+                         <property name="text">
+                          <string>CH2</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="1" column="1">
+                        <widget class="QCheckBox" name="checkBox_6">
+                         <property name="text">
+                          <string>CH4</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="2" column="0" colspan="2">
+                        <widget class="QPushButton" name="rf_ply_stp_btn_2">
+                         <property name="text">
+                          <string>Start</string>
+                         </property>
+                         <property name="icon">
+                          <iconset resource="resources.qrc">
+                           <normaloff>:/my_icons/images/icons/play.svg</normaloff>:/my_icons/images/icons/play.svg</iconset>
+                         </property>
+                         <property name="iconSize">
+                          <size>
+                           <width>20</width>
+                           <height>30</height>
+                          </size>
+                         </property>
+                        </widget>
+                       </item>
+                      </layout>
+                     </widget>
+                    </item>
+                   </layout>
+                  </item>
+                  <item>
+                   <widget class="QGroupBox" name="groupBox_7">
+                    <property name="title">
+                     <string>FT1040 Setup Info</string>
+                    </property>
+                    <layout class="QGridLayout" name="gridLayout_4">
+                     <property name="leftMargin">
+                      <number>5</number>
+                     </property>
+                     <property name="topMargin">
+                      <number>5</number>
+                     </property>
+                     <property name="rightMargin">
+                      <number>5</number>
+                     </property>
+                     <property name="bottomMargin">
+                      <number>5</number>
+                     </property>
+                     <item row="0" column="0">
+                      <widget class="QScrollArea" name="rf_scroll_2">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="widgetResizable">
+                        <bool>true</bool>
+                       </property>
+                       <widget class="QWidget" name="scrollAreaWidgetContents_2">
+                        <property name="geometry">
+                         <rect>
+                          <x>0</x>
+                          <y>0</y>
+                          <width>593</width>
+                          <height>85</height>
+                         </rect>
+                        </property>
+                        <layout class="QVBoxLayout" name="verticalLayout_17">
+                         <item>
+                          <widget class="QLabel" name="rf_msg_2">
+                           <property name="text">
+                            <string/>
+                           </property>
+                          </widget>
+                         </item>
+                        </layout>
+                       </widget>
+                      </widget>
+                     </item>
+                    </layout>
+                   </widget>
+                  </item>
+                 </layout>
                 </widget>
                </item>
                <item>
@@ -395,111 +990,119 @@ QPushButton:pressed {
                  <property name="title">
                   <string>RF Control Panel</string>
                  </property>
-                 <layout class="QVBoxLayout" name="verticalLayout_10" stretch="1,1,3">
+                 <layout class="QVBoxLayout" name="verticalLayout_13" stretch="1,2">
                   <item>
-                   <layout class="QHBoxLayout" name="horizontalLayout_7" stretch="3,12,1,3">
+                   <layout class="QHBoxLayout" name="horizontalLayout">
                     <item>
-                     <widget class="QLabel" name="label_4">
-                      <property name="text">
-                       <string>RF Generator:</string>
-                      </property>
-                     </widget>
+                     <layout class="QVBoxLayout" name="verticalLayout_12">
+                      <item>
+                       <widget class="QLabel" name="label_4">
+                        <property name="text">
+                         <string>RF Generator:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QLabel" name="label_5">
+                        <property name="text">
+                         <string>RF List Sample: </string>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
                     </item>
                     <item>
-                     <widget class="QComboBox" name="rf_cbx"/>
+                     <layout class="QVBoxLayout" name="verticalLayout_10">
+                      <item>
+                       <widget class="QComboBox" name="rf_cbx"/>
+                      </item>
+                      <item>
+                       <widget class="QLineEdit" name="rf_sample_ledit"/>
+                      </item>
+                     </layout>
                     </item>
                     <item>
-                     <widget class="QPushButton" name="rf_visa_rst_btn">
-                      <property name="text">
-                       <string/>
-                      </property>
-                      <property name="icon">
-                       <iconset resource="resources.qrc">
-                        <normaloff>:/my_icons/images/icons/restore.svg</normaloff>:/my_icons/images/icons/restore.svg</iconset>
-                      </property>
-                      <property name="iconSize">
-                       <size>
-                        <width>20</width>
-                        <height>25</height>
-                       </size>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QPushButton" name="rf_connect_btn">
-                      <property name="styleSheet">
-                       <string notr="true">QPushButton{
+                     <layout class="QGridLayout" name="gridLayout_5">
+                      <item row="0" column="0">
+                       <widget class="QPushButton" name="rf_visa_rst_btn">
+                        <property name="text">
+                         <string/>
+                        </property>
+                        <property name="icon">
+                         <iconset resource="resources.qrc">
+                          <normaloff>:/my_icons/images/icons/restore.svg</normaloff>:/my_icons/images/icons/restore.svg</iconset>
+                        </property>
+                        <property name="iconSize">
+                         <size>
+                          <width>20</width>
+                          <height>25</height>
+                         </size>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="0" column="1" colspan="2">
+                       <widget class="QPushButton" name="rf_connect_btn">
+                        <property name="styleSheet">
+                         <string notr="true">QPushButton{
 	font: 10pt &quot;Yu Gothic UI&quot;;	
 
 }</string>
-                      </property>
-                      <property name="text">
-                       <string>CONNECT</string>
-                      </property>
-                      <property name="icon">
-                       <iconset resource="resources.qrc">
-                        <normaloff>:/my_icons/images/icons/connect.svg</normaloff>:/my_icons/images/icons/connect.svg</iconset>
-                      </property>
-                      <property name="iconSize">
-                       <size>
-                        <width>20</width>
-                        <height>25</height>
-                       </size>
-                      </property>
-                     </widget>
-                    </item>
-                   </layout>
-                  </item>
-                  <item>
-                   <layout class="QHBoxLayout" name="horizontalLayout_8" stretch="4,15,3,3">
-                    <item>
-                     <widget class="QLabel" name="label_5">
-                      <property name="text">
-                       <string>RF List Sample: </string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QLineEdit" name="rf_sample_ledit"/>
-                    </item>
-                    <item>
-                     <widget class="QPushButton" name="rf_load_btn">
-                      <property name="styleSheet">
-                       <string notr="true">QPushButton{
+                        </property>
+                        <property name="text">
+                         <string>Connect</string>
+                        </property>
+                        <property name="icon">
+                         <iconset resource="resources.qrc">
+                          <normaloff>:/my_icons/images/icons/connect.svg</normaloff>:/my_icons/images/icons/connect.svg</iconset>
+                        </property>
+                        <property name="iconSize">
+                         <size>
+                          <width>20</width>
+                          <height>25</height>
+                         </size>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="1" column="0" colspan="2">
+                       <widget class="QPushButton" name="rf_load_btn">
+                        <property name="styleSheet">
+                         <string notr="true">QPushButton{
 	font: 10pt &quot;Yu Gothic UI&quot;;	
 }</string>
-                      </property>
-                      <property name="text">
-                       <string>LOAD</string>
-                      </property>
-                      <property name="icon">
-                       <iconset resource="resources.qrc">
-                        <normaloff>:/my_icons/images/icons/load.svg</normaloff>:/my_icons/images/icons/load.svg</iconset>
-                      </property>
-                      <property name="iconSize">
-                       <size>
-                        <width>20</width>
-                        <height>25</height>
-                       </size>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QPushButton" name="rf_ply_stp_btn">
-                      <property name="text">
-                       <string>RF ON</string>
-                      </property>
-                      <property name="icon">
-                       <iconset resource="resources.qrc">
-                        <normaloff>:/my_icons/images/icons/play.svg</normaloff>:/my_icons/images/icons/play.svg</iconset>
-                      </property>
-                      <property name="iconSize">
-                       <size>
-                        <width>20</width>
-                        <height>25</height>
-                       </size>
-                      </property>
-                     </widget>
+                        </property>
+                        <property name="text">
+                         <string>Load</string>
+                        </property>
+                        <property name="icon">
+                         <iconset resource="resources.qrc">
+                          <normaloff>:/my_icons/images/icons/load.svg</normaloff>:/my_icons/images/icons/load.svg</iconset>
+                        </property>
+                        <property name="iconSize">
+                         <size>
+                          <width>20</width>
+                          <height>25</height>
+                         </size>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="1" column="2">
+                       <widget class="QPushButton" name="rf_ply_stp_btn">
+                        <property name="text">
+                         <string>RF On</string>
+                        </property>
+                        <property name="icon">
+                         <iconset resource="resources.qrc">
+                          <normaloff>:/my_icons/images/icons/play.svg</normaloff>:/my_icons/images/icons/play.svg</iconset>
+                        </property>
+                        <property name="iconSize">
+                         <size>
+                          <width>20</width>
+                          <height>25</height>
+                         </size>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
                     </item>
                    </layout>
                   </item>
@@ -537,8 +1140,8 @@ QPushButton:pressed {
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>578</width>
-                          <height>91</height>
+                          <width>593</width>
+                          <height>85</height>
                          </rect>
                         </property>
                         <layout class="QVBoxLayout" name="verticalLayout_7">
@@ -588,7 +1191,7 @@ QPushButton:pressed {
                  <property name="title">
                   <string>Data Aquisition</string>
                  </property>
-                 <layout class="QVBoxLayout" name="verticalLayout_11" stretch="1,20">
+                 <layout class="QVBoxLayout" name="verticalLayout_11" stretch="1,15">
                   <property name="leftMargin">
                    <number>10</number>
                   </property>
@@ -751,6 +1354,7 @@ QPushButton:pressed {
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="rdb_grp"/>
+  <buttongroup name="stp_mode_ck_group"/>
+  <buttongroup name="file_ck_group"/>
  </buttongroups>
 </ui>
