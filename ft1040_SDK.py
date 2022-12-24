@@ -5,23 +5,22 @@ import ctypes
 DEV_ID_0 = ctypes.c_int(0)                                     # Device ID
 FTMT_TASK_RUN_MODE_T3 = ctypes.c_int(0x03)                     # T3 Mode
 FilePath = ctypes.c_char_p(b"D:\ODMRequipment\File")           # File path
-sTime = ctypes.c_float(10) # in second unit                    # Collecting time 
+sTime = ctypes.c_float(1) # in second unit                    # Collecting time 
 FTMT_START_FREQ_DIV_1 = ctypes.c_int(1)                        # Frequency division time
 FTMT_FILE_SAVE_MODE_BIN = ctypes.c_int(1)                      # Binary file type
 FTMT_FILE_SAVE_MODE_TEXT = ctypes.c_int(2)                     # Text file type
 FTMT_FILE_SERIES_MODE_EACH = ctypes.c_int(0)                   # T1 Mode parameters(useless here)
 FTMT_TTTR_END_MODE_TIME = ctypes.c_int(0)                      # Time tagger mode end mode: collecting time
 FTMT_WIN_RES_PS_64 = ctypes.c_int(6)                           # Time resolution 64ps (best for T3 mode)
-GateWidth = ctypes.c_int(300) #In unit ns                      # Gate width: 300ns
+GateWidth = ctypes.c_int(1000) #In unit ns                      # Gate width: 300ns
 GateDelay = ctypes.c_int(0) #In unit ns                        # Gate delay: no delay
 FTMT_BOARD_A = ctypes.c_int(0)                                 # brd: 0 
-CH_MASK_0 = ctypes.c_int(0b0001)       
-print(CH_MASK_0)                        # CH1 mask number
+CH_MASK_0 = ctypes.c_uint8(0b0001)                             # CH1 mask number
 FT10X0_INPUT_EDGE_RISE = ctypes.c_int(0)                       # Positive trig slope
 FTMT_CHANNEL_0 = ctypes.c_int(0)                               # CH1
 FT10X0_INPUT_IMPEDENCE_HIGH = ctypes.c_int(0)                  # 1M Ohm impedence
 FT10X0_INPUT_IMPEDENCE_50 = ctypes.c_int(1)                    # 50 Ohm impedence
-FileSize = ctypes.c_int(500) # In unit M Bytes                 # Max file size 500 M Bytes
+FileSize = ctypes.c_int(100)              # In unit M Bytes                   # Max file size 500 M Bytes
 
 class ft1040():
 
@@ -88,7 +87,7 @@ class ft1040():
         self.__dll.SetFileMode.argtypes = [ctypes.c_int, ctypes.c_int, ctypes.c_int]
         self.__dll.SetFileMode.restype = ctypes.c_int
 
-        self.__dll.SetMaxFileSize.argtypes = [ctypes.c_int]
+        self.__dll.SetMaxFileSize.argtypes = [ctypes.c_int, ctypes.c_int]
         self.__dll.SetMaxFileSize.restype = ctypes.c_int
 
         self.__dll.SetTTTREndMode.argtypes = [ctypes.c_int]
@@ -158,10 +157,9 @@ class ft1040():
         '''Set file mode (.txt or binary) '''
         return self.__dll.SetFileMode(rMode, sMode, fMode)
 
-    def SetMaxFileSize(self, size = ctypes.c_int()):
+    def SetMaxFileSize(self,devId = ctypes.c_int(), size = ctypes.c_int()):
         '''Set Max File storage Size, i.e. splitted file sizes''' # Size has unit Mega Bytes
-        return self.__dll.SetMaxFileSize(size)
-
+        return self.__dll.SetMaxFileSize(devId, size)
 
     def SetTTTREndMode(self, eMode = ctypes.c_int()):
         '''Set event end mode time or counts''' # Only time end mode is considered here, which is eMode = 0
@@ -214,58 +212,74 @@ class ft1040():
     EnableConcurrentMode
     '''
 
-if __name__ == "__main__":
-    dev = ft1040()
-    type = type(dev.GetDevType(0, ctypes.c_char_p(b"my dev")))
-    print(type)
 
-    rtn = dev.USBConnected(0)
-    print(rtn)
+dev = ft1040()
+type = type(dev.GetDevType(0, ctypes.c_char_p(b"my dev")))
+print(type)
 
-    rtn = dev.SetTimeWindowRes(DEV_ID_0, FTMT_WIN_RES_PS_64)
-    print(rtn)
+'''Check USB connection'''
+rtn = dev.USBConnected(0)
+print(rtn)
 
-    rtn = dev.SetStartFreqDiv(DEV_ID_0, FTMT_START_FREQ_DIV_1)
-    print(rtn)
+'''Set time window resolution (best 64ps for T3)'''
+rtn = dev.SetTimeWindowRes(DEV_ID_0, FTMT_WIN_RES_PS_64)
+print(rtn)
 
-    rtn = dev.SetGateHLWidth(DEV_ID_0, GateWidth)
-    print(rtn)
+'''Set division frequency'''
+rtn = dev.SetStartFreqDiv(DEV_ID_0, FTMT_START_FREQ_DIV_1)
+print(rtn)
 
-    rtn = dev.SetStartEdge(DEV_ID_0, FT10X0_INPUT_EDGE_RISE)
-    print(rtn)
-        
-    rtn = dev.SetStartImpedence(DEV_ID_0, FT10X0_INPUT_IMPEDENCE_50)
-    print(rtn)
+'''Set gate width'''
+rtn = dev.SetGateHLWidth(DEV_ID_0, GateWidth)
+print(rtn)
 
-    rtn = dev.SetStopEdge(DEV_ID_0, 0, FTMT_CHANNEL_0, FT10X0_INPUT_EDGE_RISE)
-    print(rtn)
+'''Set Start Edge'''
+rtn = dev.SetStartEdge(DEV_ID_0, FT10X0_INPUT_EDGE_RISE)
+print(rtn)
 
-    rtn = dev.SetStopImpedence(DEV_ID_0, 0, FTMT_CHANNEL_0, FT10X0_INPUT_IMPEDENCE_HIGH)
-    print(rtn)
+'''Set start impedence''' # impedence of the sync signal which AWG4100 is used    
+rtn = dev.SetStartImpedence(DEV_ID_0, FT10X0_INPUT_IMPEDENCE_50)
+print(rtn)
 
-    rtn = dev.SetGateDelay(DEV_ID_0, GateDelay)
-    print(rtn)
+'''Set stop edge''' # CH1 defined only
+rtn = dev.SetStopEdge(DEV_ID_0, 0, FTMT_CHANNEL_0, FT10X0_INPUT_EDGE_RISE)
+print(rtn)
 
-    rtn = dev.EnableTTTR(DEV_ID_0, FTMT_BOARD_A, CH_MASK_0)
-    print(rtn)
+'''Set stop impedence''' # CH1 defined only
+rtn = dev.SetStopImpedence(DEV_ID_0, 0, FTMT_CHANNEL_0, FT10X0_INPUT_IMPEDENCE_50)
+print(rtn)
 
-    rtn = dev.SetStatisticsTime(FTMT_TASK_RUN_MODE_T3, sTime)
-    print(rtn)
+'''Set the gate delay (from the sync signal)'''
+rtn = dev.SetGateDelay(DEV_ID_0, GateDelay)
+print(rtn)
 
-    rtn = dev.SetFilePath(DEV_ID_0, FTMT_TASK_RUN_MODE_T3, FilePath)
-    print(rtn)
+'''Enable TTTR mode''' 
+rtn = dev.EnableTTTR(DEV_ID_0, FTMT_BOARD_A, CH_MASK_0)
+print(rtn)
 
-    rtn = dev.SetFileMode(FTMT_TASK_RUN_MODE_T3, FTMT_FILE_SAVE_MODE_TEXT, FTMT_FILE_SERIES_MODE_EACH)
-    print(rtn)
+'''Set statistics timespan'''
+rtn = dev.SetStatisticsTime(FTMT_TASK_RUN_MODE_T3, sTime)
+print(rtn)
 
-    rtn = dev.SetMaxFileSize(FileSize)
-    print(rtn)
+'''Set file storation path'''
+rtn = dev.SetFilePath(DEV_ID_0, FTMT_TASK_RUN_MODE_T3, FilePath)
+print(rtn)
 
-    rtn = dev.SetTTTREndMode(FTMT_TTTR_END_MODE_TIME)
-    print(rtn)
+'''Set file mode (.txt or binary) '''
+rtn = dev.SetFileMode(FTMT_TASK_RUN_MODE_T3, FTMT_FILE_SAVE_MODE_TEXT, FTMT_FILE_SERIES_MODE_EACH)
+print(rtn)
 
-    rtn = dev.StartTask(FTMT_TASK_RUN_MODE_T3)
-    print(rtn)
+'''设置SetMaxFileSize'''
+rtn = dev.SetMaxFileSize(DEV_ID_0, FileSize)
+print(rtn)
+
+'''Set event end mode time or counts'''
+rtn = dev.SetTTTREndMode(FTMT_TTTR_END_MODE_TIME)
+print(rtn)
+
+'''Define start task function'''
+rtn = dev.StartTask(FTMT_TASK_RUN_MODE_T3)
+print(rtn)
 
 while True:
     if dev.IsTaskCompleted() ==True:
