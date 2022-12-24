@@ -8,7 +8,7 @@ import pyvisa
 import numpy as np
 import matplotlib.pyplot as plt
 import asg_cw_odmr_ui
-# from ft1040_SDK import *
+import ft1040_SDK
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from awg4100 import AwgDevice
 from PyQt5.QtGui import QIcon, QPixmap, QCursor, QMouseEvent, QColor, QFont
