@@ -10,14 +10,39 @@ FTMT_START_FREQ_DIV_1 = ctypes.c_int(1)                        # Frequency divis
 FTMT_FILE_SAVE_MODE_BIN = ctypes.c_int(1)                      # Binary file type
 FTMT_FILE_SAVE_MODE_TEXT = ctypes.c_int(2)                     # Text file type
 FTMT_FILE_SERIES_MODE_EACH = ctypes.c_int(0)                   # T1 Mode parameters(useless here)
+
 FTMT_TTTR_END_MODE_TIME = ctypes.c_int(0)                      # Time tagger mode end mode: collecting time
+FTMT_TTTR_END_MODE_EVENT = ctypes.c_int(1)
+
 FTMT_WIN_RES_PS_64 = ctypes.c_int(6)                           # Time resolution 64ps (best for T3 mode)
 GateWidth = ctypes.c_int(1000) #In unit ns                      # Gate width: 300ns
 GateDelay = ctypes.c_int(0) #In unit ns                        # Gate delay: no delay
 FTMT_BOARD_A = ctypes.c_int(0)                                 # brd: 0 
-CH_MASK_0 = ctypes.c_uint8(0b0001)                             # CH1 mask number
+
+CH_MASK_0001 = ctypes.c_uint8(0b0001)                             # CH1 mask number
+CH_MASK_0010 = ctypes.c_uint8(0b0010) 
+CH_MASK_0100 = ctypes.c_uint8(0b0100) 
+CH_MASK_1000 = ctypes.c_uint8(0b1000) 
+CH_MASK_0011 = ctypes.c_uint8(0b0011) 
+CH_MASK_0101 = ctypes.c_uint8(0b0101) 
+CH_MASK_1001 = ctypes.c_uint8(0b1001) 
+CH_MASK_0110 = ctypes.c_uint8(0b0110) 
+CH_MASK_1010 = ctypes.c_uint8(0b1010) 
+CH_MASK_1100 = ctypes.c_uint8(0b1100) 
+CH_MASK_0111 = ctypes.c_uint8(0b0111) 
+CH_MASK_1011 = ctypes.c_uint8(0b1011) 
+CH_MASK_1101 = ctypes.c_uint8(0b1101) 
+CH_MASK_1110 = ctypes.c_uint8(0b1110)
+CH_MASK_1111 = ctypes.c_uint8(0b1111)  
+
 FT10X0_INPUT_EDGE_RISE = ctypes.c_int(0)                       # Positive trig slope
+FT10X0_INPUT_EDGE_FALL = ctypes.c_int(1)                       # Negative trig slope
+
 FTMT_CHANNEL_0 = ctypes.c_int(0)                               # CH1
+FTMT_CHANNEL_1 = ctypes.c_int(1)                               # CH2
+FTMT_CHANNEL_2 = ctypes.c_int(2)                               # CH3
+FTMT_CHANNEL_3 = ctypes.c_int(3)                               # CH4
+
 FT10X0_INPUT_IMPEDENCE_HIGH = ctypes.c_int(0)                  # 1M Ohm impedence
 FT10X0_INPUT_IMPEDENCE_50 = ctypes.c_int(1)                    # 50 Ohm impedence
 FileSize = ctypes.c_int(100)              # In unit M Bytes                   # Max file size 500 M Bytes
@@ -168,9 +193,15 @@ class ft1040():
     def GetFilePath(self, devId = ctypes.c_int(), rMode = ctypes.c_int(), path = ctypes.c_char_p()):
         return self.__dll.GetFilePath(devId, rMode, path)
 
-    def SetTTTREndMode(self, eMode = ctypes.c_int()):
+    def SetTTTREndMode(self, eMode = ctypes.c_int(), eCounts = int()):
         '''Set event end mode time or counts''' # Only time end mode is considered here, which is eMode = 0
-        return self.__dll.SetTTTREndMode(eMode)
+        if eCounts == 0:
+            return self.__dll.SetTTTREndMode(eMode)
+        else:
+            eCounts = ctypes.c_uint64(eCounts)
+            self.__dll.SetTTTREndMode.argtypes = [ctypes.c_int, ctypes.c_uint64]
+            self.__dll.SetTTTREndMode.restype = ctypes.c_int
+            return self.__dll.SetTTTREndMode(eMode, eCounts)
 
     def StartTask(self, rMode = ctypes.c_int()):
         '''Define start task function'''
@@ -261,7 +292,7 @@ if __name__ == "__main__":
     print(rtn)
 
     '''Enable TTTR mode''' 
-    rtn = dev.EnableTTTR(DEV_ID_0, FTMT_BOARD_A, CH_MASK_0)
+    rtn = dev.EnableTTTR(DEV_ID_0, FTMT_BOARD_A, CH_MASK_0001)
     print(rtn)
 
     '''Set statistics timespan'''

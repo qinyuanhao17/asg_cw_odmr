@@ -61,3 +61,4 @@ GetFilePath.argtypes = [ctypes.c_int, ctypes.c_int, ctypes.c_char_p]
 GetFilePath.restype = ctypes.c_int
 rtn = GetFilePath(DEV_ID_0, FTMT_TASK_RUN_MODE_T3, FilePath)
 print(rtn)
+
