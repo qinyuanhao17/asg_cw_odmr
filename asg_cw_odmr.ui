@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1327</width>
+    <width>1446</width>
     <height>946</height>
    </rect>
   </property>
@@ -364,7 +364,7 @@ QPushButton:pressed {
               <property name="frameShadow">
                <enum>QFrame::Raised</enum>
               </property>
-              <layout class="QVBoxLayout" name="verticalLayout_2" stretch="3,2">
+              <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0,2">
                <property name="spacing">
                 <number>5</number>
                </property>
@@ -388,9 +388,9 @@ QPushButton:pressed {
                  <property name="title">
                   <string>TCSPC-T3MODE Control Panel</string>
                  </property>
-                 <layout class="QVBoxLayout" name="verticalLayout_3">
+                 <layout class="QVBoxLayout" name="verticalLayout_23">
                   <item>
-                   <layout class="QHBoxLayout" name="horizontalLayout_7" stretch="1,1">
+                   <layout class="QHBoxLayout" name="horizontalLayout_7" stretch="0,1">
                     <item>
                      <widget class="QTabWidget" name="tabWidget">
                       <property name="currentIndex">
@@ -414,68 +414,135 @@ QPushButton:pressed {
                        </attribute>
                        <layout class="QVBoxLayout" name="verticalLayout_9">
                         <item>
-                         <layout class="QHBoxLayout" name="horizontalLayout_5">
+                         <layout class="QHBoxLayout" name="horizontalLayout_24">
                           <item>
-                           <layout class="QVBoxLayout" name="verticalLayout_6">
-                            <property name="spacing">
-                             <number>7</number>
+                           <widget class="QGroupBox" name="groupBox_10">
+                            <property name="title">
+                             <string>Global Setting</string>
                             </property>
-                            <item>
-                             <widget class="QLabel" name="label_3">
-                              <property name="text">
-                               <string>Resolution :</string>
-                              </property>
-                             </widget>
-                            </item>
-                            <item>
-                             <widget class="QLabel" name="label_7">
-                              <property name="text">
-                               <string>Freq Division:</string>
-                              </property>
-                             </widget>
-                            </item>
-                            <item>
-                             <widget class="QLabel" name="label_8">
-                              <property name="text">
-                               <string>Gate Delay (ns):</string>
-                              </property>
-                             </widget>
-                            </item>
-                            <item>
-                             <widget class="QLabel" name="label_9">
-                              <property name="text">
-                               <string>Gate Width (ns):</string>
-                              </property>
-                             </widget>
-                            </item>
-                           </layout>
+                            <layout class="QHBoxLayout" name="horizontalLayout_5">
+                             <item>
+                              <layout class="QVBoxLayout" name="verticalLayout_6">
+                               <property name="spacing">
+                                <number>7</number>
+                               </property>
+                               <item>
+                                <widget class="QLabel" name="label_3">
+                                 <property name="text">
+                                  <string>Resolution :</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item>
+                                <widget class="QLabel" name="label_7">
+                                 <property name="text">
+                                  <string>Freq Division:</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item>
+                                <widget class="QLabel" name="label_8">
+                                 <property name="text">
+                                  <string>Gate Delay (ns):</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item>
+                                <widget class="QLabel" name="label_9">
+                                 <property name="text">
+                                  <string>Gate Width (ns):</string>
+                                 </property>
+                                </widget>
+                               </item>
+                              </layout>
+                             </item>
+                             <item>
+                              <layout class="QVBoxLayout" name="verticalLayout_8">
+                               <property name="spacing">
+                                <number>10</number>
+                               </property>
+                               <item>
+                                <widget class="QComboBox" name="res_cbx_btn"/>
+                               </item>
+                               <item>
+                                <widget class="QComboBox" name="frq_div_cbx_btn"/>
+                               </item>
+                               <item>
+                                <widget class="QLineEdit" name="gate_delay_ledit">
+                                 <property name="text">
+                                  <string>0</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item>
+                                <widget class="QLineEdit" name="gate_width_ledit">
+                                 <property name="text">
+                                  <string>100</string>
+                                 </property>
+                                </widget>
+                               </item>
+                              </layout>
+                             </item>
+                            </layout>
+                           </widget>
                           </item>
                           <item>
-                           <layout class="QVBoxLayout" name="verticalLayout_8">
-                            <property name="spacing">
-                             <number>10</number>
+                           <widget class="QGroupBox" name="groupBox_5">
+                            <property name="title">
+                             <string>Input Channel</string>
                             </property>
-                            <item>
-                             <widget class="QComboBox" name="res_cbx_btn"/>
-                            </item>
-                            <item>
-                             <widget class="QComboBox" name="frq_div_cbx_btn"/>
-                            </item>
-                            <item>
-                             <widget class="QLineEdit" name="gate_delay_ledit">
-                              <property name="text">
-                               <string>0</string>
-                              </property>
-                             </widget>
-                            </item>
-                            <item>
-                             <widget class="QLineEdit" name="gate_width_ledit">
-                              <property name="text">
-                               <string>100</string>
-                              </property>
-                             </widget>
-                            </item>
-                           </layout>
+                            <layout class="QVBoxLayout" name="verticalLayout_21">
+                             <item>
+                              <widget class="QCheckBox" name="ch1_ckbox">
+                               <property name="text">
+                                <string>Channel 1</string>
+                               </property>
+                              </widget>
+                             </item>
+                             <item>
+                              <widget class="QCheckBox" name="ch2_ckbox">
+                               <property name="text">
+                                <string>Channel 2</string>
+                               </property>
+                              </widget>
+                             </item>
+                             <item>
+                              <widget class="QCheckBox" name="ch3_ckbox">
+                               <property name="text">
+                                <string>Channel 3</string>
+                               </property>
+                              </widget>
+                             </item>
+                             <item>
+                              <widget class="QCheckBox" name="ch4_ckbox">
+                               <property name="text">
+                                <string>Channel 4</string>
+                               </property>
+                              </widget>
+                             </item>
+                             <item>
+                              <layout class="QHBoxLayout" name="horizontalLayout_21">
+                               <item>
+                                <widget class="QPushButton" name="enable_tttr_btn">
+                                 <property name="text">
+                                  <string>Enable T3</string>
+                                 </property>
+                                 <property name="icon">
+                                  <iconset resource="resources.qrc">
+                                   <normaloff>:/my_icons/images/icons/enable.svg</normaloff>:/my_icons/images/icons/enable.svg</iconset>
+                                 </property>
+                                 <property name="iconSize">
+                                  <size>
+                                   <width>20</width>
+                                   <height>30</height>
+                                  </size>
+                                 </property>
+                                </widget>
+                               </item>
+                              </layout>
+                             </item>
+                            </layout>
+                           </widget>
                           </item>
                          </layout>
                         </item>
@@ -511,239 +578,266 @@ QPushButton:pressed {
                        </attribute>
                        <layout class="QVBoxLayout" name="verticalLayout_18">
                         <item>
-                         <widget class="QFrame" name="frame_7">
-                          <property name="frameShape">
-                           <enum>QFrame::StyledPanel</enum>
-                          </property>
-                          <property name="frameShadow">
-                           <enum>QFrame::Raised</enum>
-                          </property>
-                          <layout class="QHBoxLayout" name="horizontalLayout_8" stretch="1,3,3">
-                           <property name="spacing">
-                            <number>5</number>
-                           </property>
-                           <property name="leftMargin">
-                            <number>0</number>
-                           </property>
-                           <property name="topMargin">
-                            <number>0</number>
-                           </property>
-                           <property name="rightMargin">
-                            <number>0</number>
-                           </property>
-                           <property name="bottomMargin">
-                            <number>0</number>
-                           </property>
-                           <item>
-                            <layout class="QVBoxLayout" name="verticalLayout_16">
-                             <item>
-                              <widget class="QLabel" name="label_19">
-                               <property name="text">
-                                <string/>
-                               </property>
-                              </widget>
-                             </item>
-                             <item>
-                              <widget class="QLabel" name="label_12">
-                               <property name="text">
-                                <string>SYNC:</string>
-                               </property>
-                              </widget>
-                             </item>
-                             <item>
-                              <widget class="QLabel" name="label_13">
-                               <property name="text">
-                                <string> CH1:</string>
-                               </property>
-                              </widget>
-                             </item>
-                             <item>
-                              <widget class="QLabel" name="label_14">
-                               <property name="text">
-                                <string> CH2:</string>
-                               </property>
-                              </widget>
-                             </item>
-                             <item>
-                              <widget class="QLabel" name="label_15">
-                               <property name="text">
-                                <string> CH3:</string>
-                               </property>
-                              </widget>
-                             </item>
-                             <item>
-                              <widget class="QLabel" name="label_16">
-                               <property name="text">
-                                <string> CH4:</string>
-                               </property>
-                              </widget>
-                             </item>
-                            </layout>
-                           </item>
-                           <item>
-                            <layout class="QVBoxLayout" name="verticalLayout_15">
-                             <item>
-                              <widget class="QLabel" name="label_18">
-                               <property name="text">
-                                <string>Impedence</string>
-                               </property>
-                              </widget>
-                             </item>
-                             <item>
-                              <widget class="QComboBox" name="sync_imp_cbx">
-                               <item>
+                         <layout class="QHBoxLayout" name="horizontalLayout_22">
+                          <item>
+                           <layout class="QHBoxLayout" name="horizontalLayout_8">
+                            <item>
+                             <layout class="QVBoxLayout" name="verticalLayout_16">
+                              <item>
+                               <widget class="QLabel" name="label_19">
                                 <property name="text">
-                                 <string>50Ω</string>
+                                 <string/>
                                 </property>
-                               </item>
-                               <item>
+                               </widget>
+                              </item>
+                              <item>
+                               <widget class="QLabel" name="label_12">
                                 <property name="text">
-                                 <string>1MΩ</string>
+                                 <string>SYNC:</string>
                                 </property>
-                               </item>
-                              </widget>
-                             </item>
-                             <item>
-                              <widget class="QComboBox" name="ch1_imp_cbx">
-                               <item>
+                               </widget>
+                              </item>
+                              <item>
+                               <widget class="QLabel" name="label_13">
                                 <property name="text">
-                                 <string>1MΩ</string>
+                                 <string> CH1:</string>
                                 </property>
-                               </item>
-                               <item>
+                               </widget>
+                              </item>
+                              <item>
+                               <widget class="QLabel" name="label_14">
                                 <property name="text">
-                                 <string>50Ω</string>
+                                 <string> CH2:</string>
                                 </property>
-                               </item>
-                              </widget>
-                             </item>
-                             <item>
-                              <widget class="QComboBox" name="ch2_imp_cbx">
-                               <item>
+                               </widget>
+                              </item>
+                              <item>
+                               <widget class="QLabel" name="label_15">
                                 <property name="text">
-                                 <string>1MΩ</string>
+                                 <string> CH3:</string>
                                 </property>
-                               </item>
-                               <item>
+                               </widget>
+                              </item>
+                              <item>
+                               <widget class="QLabel" name="label_16">
                                 <property name="text">
-                                 <string>50Ω</string>
+                                 <string> CH4:</string>
                                 </property>
-                               </item>
-                              </widget>
-                             </item>
-                             <item>
-                              <widget class="QComboBox" name="ch3_imp_cbx">
-                               <item>
+                               </widget>
+                              </item>
+                             </layout>
+                            </item>
+                            <item>
+                             <layout class="QVBoxLayout" name="verticalLayout_15">
+                              <item>
+                               <widget class="QLabel" name="label_18">
                                 <property name="text">
-                                 <string>1MΩ</string>
+                                 <string>Impedence</string>
                                 </property>
-                               </item>
-                               <item>
+                               </widget>
+                              </item>
+                              <item>
+                               <widget class="QComboBox" name="sync_imp_cbx">
+                                <item>
+                                 <property name="text">
+                                  <string>50Ω</string>
+                                 </property>
+                                </item>
+                                <item>
+                                 <property name="text">
+                                  <string>1MΩ</string>
+                                 </property>
+                                </item>
+                               </widget>
+                              </item>
+                              <item>
+                               <widget class="QComboBox" name="ch1_imp_cbx">
+                                <item>
+                                 <property name="text">
+                                  <string>1MΩ</string>
+                                 </property>
+                                </item>
+                                <item>
+                                 <property name="text">
+                                  <string>50Ω</string>
+                                 </property>
+                                </item>
+                               </widget>
+                              </item>
+                              <item>
+                               <widget class="QComboBox" name="ch2_imp_cbx">
+                                <item>
+                                 <property name="text">
+                                  <string>1MΩ</string>
+                                 </property>
+                                </item>
+                                <item>
+                                 <property name="text">
+                                  <string>50Ω</string>
+                                 </property>
+                                </item>
+                               </widget>
+                              </item>
+                              <item>
+                               <widget class="QComboBox" name="ch3_imp_cbx">
+                                <item>
+                                 <property name="text">
+                                  <string>1MΩ</string>
+                                 </property>
+                                </item>
+                                <item>
+                                 <property name="text">
+                                  <string>50Ω</string>
+                                 </property>
+                                </item>
+                               </widget>
+                              </item>
+                              <item>
+                               <widget class="QComboBox" name="ch4_imp_cbx">
+                                <item>
+                                 <property name="text">
+                                  <string>1MΩ</string>
+                                 </property>
+                                </item>
+                                <item>
+                                 <property name="text">
+                                  <string>50Ω</string>
+                                 </property>
+                                </item>
+                               </widget>
+                              </item>
+                             </layout>
+                            </item>
+                            <item>
+                             <layout class="QVBoxLayout" name="verticalLayout_14">
+                              <item>
+                               <widget class="QLabel" name="label_17">
                                 <property name="text">
-                                 <string>50Ω</string>
+                                 <string>Trig Mode</string>
                                 </property>
-                               </item>
-                              </widget>
-                             </item>
-                             <item>
-                              <widget class="QComboBox" name="ch4_imp_cbx">
-                               <item>
-                                <property name="text">
-                                 <string>1MΩ</string>
-                                </property>
-                               </item>
-                               <item>
-                                <property name="text">
-                                 <string>50Ω</string>
-                                </property>
-                               </item>
-                              </widget>
-                             </item>
-                            </layout>
-                           </item>
-                           <item>
-                            <layout class="QVBoxLayout" name="verticalLayout_14">
-                             <item>
-                              <widget class="QLabel" name="label_17">
-                               <property name="text">
-                                <string>Trig Mode</string>
-                               </property>
-                              </widget>
-                             </item>
-                             <item>
-                              <widget class="QComboBox" name="sync_trig_cbx">
-                               <item>
-                                <property name="text">
-                                 <string>Positive</string>
-                                </property>
-                               </item>
-                               <item>
-                                <property name="text">
-                                 <string>Negative</string>
-                                </property>
-                               </item>
-                              </widget>
-                             </item>
-                             <item>
-                              <widget class="QComboBox" name="ch1_trig_cbx">
-                               <item>
-                                <property name="text">
-                                 <string>Positive</string>
-                                </property>
-                               </item>
-                               <item>
-                                <property name="text">
-                                 <string>Negative</string>
-                                </property>
-                               </item>
-                              </widget>
-                             </item>
-                             <item>
-                              <widget class="QComboBox" name="ch2_trig_cbx">
-                               <item>
-                                <property name="text">
-                                 <string>Positive</string>
-                                </property>
-                               </item>
-                               <item>
-                                <property name="text">
-                                 <string>Negative</string>
-                                </property>
-                               </item>
-                              </widget>
-                             </item>
-                             <item>
-                              <widget class="QComboBox" name="ch3_trig_cbx">
-                               <item>
-                                <property name="text">
-                                 <string>Positive</string>
-                                </property>
-                               </item>
-                               <item>
-                                <property name="text">
-                                 <string>Negative</string>
-                                </property>
-                               </item>
-                              </widget>
-                             </item>
-                             <item>
-                              <widget class="QComboBox" name="ch4_trig_cbx">
-                               <item>
-                                <property name="text">
-                                 <string>Positive</string>
-                                </property>
-                               </item>
-                               <item>
-                                <property name="text">
-                                 <string>Negative</string>
-                                </property>
-                               </item>
-                              </widget>
-                             </item>
-                            </layout>
-                           </item>
-                          </layout>
-                         </widget>
+                               </widget>
+                              </item>
+                              <item>
+                               <widget class="QComboBox" name="sync_trig_cbx">
+                                <item>
+                                 <property name="text">
+                                  <string>Positive</string>
+                                 </property>
+                                </item>
+                                <item>
+                                 <property name="text">
+                                  <string>Negative</string>
+                                 </property>
+                                </item>
+                               </widget>
+                              </item>
+                              <item>
+                               <widget class="QComboBox" name="ch1_trig_cbx">
+                                <item>
+                                 <property name="text">
+                                  <string>Positive</string>
+                                 </property>
+                                </item>
+                                <item>
+                                 <property name="text">
+                                  <string>Negative</string>
+                                 </property>
+                                </item>
+                               </widget>
+                              </item>
+                              <item>
+                               <widget class="QComboBox" name="ch2_trig_cbx">
+                                <item>
+                                 <property name="text">
+                                  <string>Positive</string>
+                                 </property>
+                                </item>
+                                <item>
+                                 <property name="text">
+                                  <string>Negative</string>
+                                 </property>
+                                </item>
+                               </widget>
+                              </item>
+                              <item>
+                               <widget class="QComboBox" name="ch3_trig_cbx">
+                                <item>
+                                 <property name="text">
+                                  <string>Positive</string>
+                                 </property>
+                                </item>
+                                <item>
+                                 <property name="text">
+                                  <string>Negative</string>
+                                 </property>
+                                </item>
+                               </widget>
+                              </item>
+                              <item>
+                               <widget class="QComboBox" name="ch4_trig_cbx">
+                                <item>
+                                 <property name="text">
+                                  <string>Positive</string>
+                                 </property>
+                                </item>
+                                <item>
+                                 <property name="text">
+                                  <string>Negative</string>
+                                 </property>
+                                </item>
+                               </widget>
+                              </item>
+                             </layout>
+                            </item>
+                           </layout>
+                          </item>
+                          <item>
+                           <layout class="QVBoxLayout" name="verticalLayout_22">
+                            <item>
+                             <widget class="QLabel" name="label_20">
+                              <property name="text">
+                               <string>Threshold (mV)</string>
+                              </property>
+                             </widget>
+                            </item>
+                            <item>
+                             <widget class="QLineEdit" name="sync_thresh_ledit">
+                              <property name="text">
+                               <string>1500</string>
+                              </property>
+                             </widget>
+                            </item>
+                            <item>
+                             <widget class="QLineEdit" name="ch1_thresh_ledit">
+                              <property name="text">
+                               <string>1500</string>
+                              </property>
+                             </widget>
+                            </item>
+                            <item>
+                             <widget class="QLineEdit" name="ch2_thresh_ledit">
+                              <property name="text">
+                               <string>1500</string>
+                              </property>
+                             </widget>
+                            </item>
+                            <item>
+                             <widget class="QLineEdit" name="ch3_thresh_ledit">
+                              <property name="text">
+                               <string>1500</string>
+                              </property>
+                             </widget>
+                            </item>
+                            <item>
+                             <widget class="QLineEdit" name="ch4_thresh_ledit">
+                              <property name="text">
+                               <string>1500</string>
+                              </property>
+                             </widget>
+                            </item>
+                           </layout>
+                          </item>
+                         </layout>
                         </item>
                         <item>
                          <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="3,1">
@@ -980,63 +1074,100 @@ QPushButton:pressed {
                    </layout>
                   </item>
                   <item>
-                   <layout class="QHBoxLayout" name="horizontalLayout_13" stretch="1,0">
+                   <layout class="QHBoxLayout" name="horizontalLayout_13" stretch="3,1">
                     <item>
-                     <widget class="QGroupBox" name="groupBox_5">
+                     <widget class="QGroupBox" name="groupBox_9">
                       <property name="title">
-                       <string>Input Channel</string>
+                       <string>Stop Mode</string>
                       </property>
-                      <layout class="QVBoxLayout" name="verticalLayout_21">
+                      <layout class="QHBoxLayout" name="horizontalLayout_23" stretch="3">
                        <item>
-                        <layout class="QGridLayout" name="gridLayout">
-                         <item row="0" column="0">
-                          <widget class="QCheckBox" name="ch1_ckbox">
-                           <property name="text">
-                            <string>CH1</string>
-                           </property>
-                          </widget>
-                         </item>
-                         <item row="0" column="1">
-                          <widget class="QCheckBox" name="ch3_ckbox">
-                           <property name="text">
-                            <string>CH3</string>
-                           </property>
-                          </widget>
-                         </item>
-                         <item row="1" column="0">
-                          <widget class="QCheckBox" name="ch2_ckbox">
-                           <property name="text">
-                            <string>CH2</string>
-                           </property>
-                          </widget>
-                         </item>
-                         <item row="1" column="1">
-                          <widget class="QCheckBox" name="ch4_ckbox">
-                           <property name="text">
-                            <string>CH4</string>
-                           </property>
-                          </widget>
-                         </item>
-                        </layout>
-                       </item>
-                       <item>
-                        <layout class="QHBoxLayout" name="horizontalLayout_21">
+                        <layout class="QVBoxLayout" name="verticalLayout_20">
                          <item>
-                          <widget class="QPushButton" name="enable_tttr_btn">
-                           <property name="text">
-                            <string>Enable T3</string>
-                           </property>
-                           <property name="icon">
-                            <iconset resource="resources.qrc">
-                             <normaloff>:/my_icons/images/icons/enable.svg</normaloff>:/my_icons/images/icons/enable.svg</iconset>
-                           </property>
-                           <property name="iconSize">
-                            <size>
-                             <width>20</width>
-                             <height>30</height>
-                            </size>
+                          <layout class="QHBoxLayout" name="horizontalLayout_20" stretch="2,1,2,3,2">
+                           <item>
+                            <widget class="QCheckBox" name="time_stp_ckbox">
+                             <property name="text">
+                              <string>Time STP</string>
+                             </property>
+                             <attribute name="buttonGroup">
+                              <string notr="true">stp_mode_ck_group</string>
+                             </attribute>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="Line" name="line">
+                             <property name="frameShadow">
+                              <enum>QFrame::Raised</enum>
+                             </property>
+                             <property name="orientation">
+                              <enum>Qt::Vertical</enum>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QLabel" name="label_21">
+                             <property name="text">
+                              <string>sTime (s):</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QLineEdit" name="time_stp_ledit"/>
+                           </item>
+                           <item>
+                            <widget class="QPushButton" name="time_stp_set_btn">
+                             <property name="text">
+                              <string>Set</string>
+                             </property>
+                            </widget>
+                           </item>
+                          </layout>
+                         </item>
+                         <item>
+                          <widget class="Line" name="line_5">
+                           <property name="orientation">
+                            <enum>Qt::Horizontal</enum>
                            </property>
                           </widget>
+                         </item>
+                         <item>
+                          <layout class="QHBoxLayout" name="horizontalLayout_6" stretch="2,1,2,3,2">
+                           <item>
+                            <widget class="QCheckBox" name="event_stp_ckbox">
+                             <property name="text">
+                              <string>Event STP</string>
+                             </property>
+                             <attribute name="buttonGroup">
+                              <string notr="true">stp_mode_ck_group</string>
+                             </attribute>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="Line" name="line_6">
+                             <property name="orientation">
+                              <enum>Qt::Vertical</enum>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QLabel" name="label_24">
+                             <property name="text">
+                              <string>eCounts:</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QLineEdit" name="event_stp_ledit"/>
+                           </item>
+                           <item>
+                            <widget class="QPushButton" name="event_stp_set_btn">
+                             <property name="text">
+                              <string>Set</string>
+                             </property>
+                            </widget>
+                           </item>
+                          </layout>
                          </item>
                         </layout>
                        </item>
@@ -1044,96 +1175,44 @@ QPushButton:pressed {
                      </widget>
                     </item>
                     <item>
-                     <widget class="QGroupBox" name="groupBox_9">
+                     <widget class="QGroupBox" name="groupBox_4">
                       <property name="title">
-                       <string>Stop Mode</string>
+                       <string>Start Test</string>
                       </property>
-                      <layout class="QVBoxLayout" name="verticalLayout_20">
+                      <layout class="QVBoxLayout" name="verticalLayout_3">
                        <item>
-                        <layout class="QHBoxLayout" name="horizontalLayout_20" stretch="3,0,2,3,2">
-                         <item>
-                          <widget class="QCheckBox" name="time_stp_ckbox">
-                           <property name="text">
-                            <string>Time STP</string>
-                           </property>
-                           <attribute name="buttonGroup">
-                            <string notr="true">stp_mode_ck_group</string>
-                           </attribute>
-                          </widget>
-                         </item>
-                         <item>
-                          <widget class="Line" name="line">
-                           <property name="frameShadow">
-                            <enum>QFrame::Raised</enum>
-                           </property>
-                           <property name="orientation">
-                            <enum>Qt::Vertical</enum>
-                           </property>
-                          </widget>
-                         </item>
-                         <item>
-                          <widget class="QLabel" name="label_21">
-                           <property name="text">
-                            <string>sTime (s):</string>
-                           </property>
-                          </widget>
-                         </item>
-                         <item>
-                          <widget class="QLineEdit" name="time_stp_ledit"/>
-                         </item>
-                         <item>
-                          <widget class="QPushButton" name="time_stp_set_btn">
-                           <property name="text">
-                            <string>Set</string>
-                           </property>
-                          </widget>
-                         </item>
-                        </layout>
-                       </item>
-                       <item>
-                        <widget class="Line" name="line_5">
-                         <property name="orientation">
-                          <enum>Qt::Horizontal</enum>
+                        <widget class="QPushButton" name="ft_ply_btn">
+                         <property name="text">
+                          <string>Start</string>
+                         </property>
+                         <property name="icon">
+                          <iconset resource="resources.qrc">
+                           <normaloff>:/my_icons/images/icons/play.svg</normaloff>:/my_icons/images/icons/play.svg</iconset>
+                         </property>
+                         <property name="iconSize">
+                          <size>
+                           <width>20</width>
+                           <height>30</height>
+                          </size>
                          </property>
                         </widget>
                        </item>
                        <item>
-                        <layout class="QHBoxLayout" name="horizontalLayout_6" stretch="3,0,2,3,2">
-                         <item>
-                          <widget class="QCheckBox" name="event_stp_ckbox">
-                           <property name="text">
-                            <string>Event STP</string>
-                           </property>
-                           <attribute name="buttonGroup">
-                            <string notr="true">stp_mode_ck_group</string>
-                           </attribute>
-                          </widget>
-                         </item>
-                         <item>
-                          <widget class="Line" name="line_6">
-                           <property name="orientation">
-                            <enum>Qt::Vertical</enum>
-                           </property>
-                          </widget>
-                         </item>
-                         <item>
-                          <widget class="QLabel" name="label_24">
-                           <property name="text">
-                            <string>eCounts:</string>
-                           </property>
-                          </widget>
-                         </item>
-                         <item>
-                          <widget class="QLineEdit" name="event_stp_ledit"/>
-                         </item>
-                         <item>
-                          <widget class="QPushButton" name="event_stp_set_btn">
-                           <property name="text">
-                            <string>Set</string>
-                           </property>
-                          </widget>
-                         </item>
-                        </layout>
+                        <widget class="QPushButton" name="reconfirm_btn">
+                         <property name="text">
+                          <string>Restart All</string>
+                         </property>
+                         <property name="icon">
+                          <iconset resource="resources.qrc">
+                           <normaloff>:/my_icons/images/icons/restore.svg</normaloff>:/my_icons/images/icons/restore.svg</iconset>
+                         </property>
+                         <property name="iconSize">
+                          <size>
+                           <width>20</width>
+                           <height>30</height>
+                          </size>
+                         </property>
+                        </widget>
                        </item>
                       </layout>
                      </widget>
@@ -1141,41 +1220,7 @@ QPushButton:pressed {
                    </layout>
                   </item>
                   <item>
-                   <layout class="QHBoxLayout" name="horizontalLayout_12" stretch="0,2,1,7">
-                    <item>
-                     <widget class="QPushButton" name="reconfirm_btn">
-                      <property name="text">
-                       <string/>
-                      </property>
-                      <property name="icon">
-                       <iconset resource="resources.qrc">
-                        <normaloff>:/my_icons/images/icons/restore.svg</normaloff>:/my_icons/images/icons/restore.svg</iconset>
-                      </property>
-                      <property name="iconSize">
-                       <size>
-                        <width>20</width>
-                        <height>25</height>
-                       </size>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QPushButton" name="ft_ply_btn">
-                      <property name="text">
-                       <string>Start</string>
-                      </property>
-                      <property name="icon">
-                       <iconset resource="resources.qrc">
-                        <normaloff>:/my_icons/images/icons/play.svg</normaloff>:/my_icons/images/icons/play.svg</iconset>
-                      </property>
-                      <property name="iconSize">
-                       <size>
-                        <width>20</width>
-                        <height>30</height>
-                       </size>
-                      </property>
-                     </widget>
-                    </item>
+                   <layout class="QHBoxLayout" name="horizontalLayout_12" stretch="1,7">
                     <item>
                      <widget class="QLabel" name="label_22">
                       <property name="text">
@@ -1226,7 +1271,7 @@ QPushButton:pressed {
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>597</width>
+                          <width>663</width>
                           <height>85</height>
                          </rect>
                         </property>
@@ -1406,8 +1451,8 @@ QPushButton:pressed {
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>597</width>
-                          <height>85</height>
+                          <width>663</width>
+                          <height>100</height>
                          </rect>
                         </property>
                         <layout class="QVBoxLayout" name="verticalLayout_7">
@@ -1457,7 +1502,7 @@ QPushButton:pressed {
                  <property name="title">
                   <string>Data Aquisition</string>
                  </property>
-                 <layout class="QVBoxLayout" name="verticalLayout_11" stretch="1,10">
+                 <layout class="QVBoxLayout" name="verticalLayout_11" stretch="1,15">
                   <property name="leftMargin">
                    <number>10</number>
                   </property>

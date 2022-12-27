@@ -97,6 +97,12 @@ class ft1040():
         self.__dll.SetStopImpedence.argtypes = [ctypes.c_int, ctypes.c_int, ctypes.c_int, ctypes.c_int]
         self.__dll.SetStopImpedence.restype = ctypes.c_int
 
+        self.__dll.SetStartThreshold.argtypes = [ctypes.c_int, ctypes.c_int, ctypes.c_int]
+        self.__dll.SetStartThreshold.restype = ctypes.c_int
+        
+        self.__dll.SetStopThreshold.argtypes = [ctypes.c_int, ctypes.c_int, ctypes.c_int, ctypes.c_int]
+        self.__dll.SetStopThreshold.restype = ctypes.c_int
+
         self.__dll.SetGateDelay.argtypes = [ctypes.c_int, ctypes.c_int]
         self.__dll.SetGateDelay.restype = ctypes.c_int
 
@@ -215,11 +221,15 @@ class ft1040():
         '''Check if task is completed'''
         return self.__dll.IsTaskCompleted()
 
+    def SetStartThreshold(self, devId = ctypes.c_int(), brd = ctypes.c_int(), startThrsh = ctypes.c_int()):
+        return self.__dll.SetStartThreshold(devId, brd, startThrsh)
+    
+    def SetStopThreshold(self, devId = ctypes.c_int(), brd = ctypes.c_int(), chl = ctypes.c_int(), stopThrsh = ctypes.c_int()):
+        return self.__dll.SetStopThreshold(devId, brd, chl, stopThrsh)
+
     '''
     Functions that are not defined here:
     SetBlockedWindow
-    SetStartThreshold
-    SetStopThreshold
     SetStopDelay
     SetPulseCycle
     GetRunMode

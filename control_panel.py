@@ -12,7 +12,7 @@ from threading import Thread
 from ft1040_SDK import *
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from PyQt5.QtGui import QIcon, QPixmap, QCursor, QMouseEvent, QColor, QFont
-from PyQt5.QtCore import Qt, pyqtSignal, QPoint
+from PyQt5.QtCore import Qt, pyqtSignal, QPoint, QEvent
 from PyQt5.QtWidgets import QWidget, QApplication, QGraphicsDropShadowEffect, QVBoxLayout, QLabel, QFileDialog, QDesktopWidget
 
 class MyWindow(asg_cw_odmr_ui.Ui_Form, QWidget):
@@ -28,9 +28,9 @@ class MyWindow(asg_cw_odmr_ui.Ui_Form, QWidget):
 
         # init UI
         self.setupUi(self)
-        ui_width = int(QDesktopWidget().availableGeometry().size().width()*0.68)
-        ui_height = int(QDesktopWidget().availableGeometry().size().height()*0.72)
-        self.resize(ui_width, ui_height)
+        self.ui_width = int(QDesktopWidget().availableGeometry().size().width()*0.75)
+        self.ui_height = int(QDesktopWidget().availableGeometry().size().height()*0.72)
+        self.resize(self.ui_width, self.ui_height)
         center_pointer = QDesktopWidget().availableGeometry().center()
         x = center_pointer.x()
         y = center_pointer.y()
@@ -339,7 +339,7 @@ class MyWindow(asg_cw_odmr_ui.Ui_Form, QWidget):
             else:
                 self.ft_info_msg.emit("Setting CH4 input impedence failed.")
 
-        '''Setting CH1 input edge'''
+        '''Setting CH4 input edge'''
         ch4_trig = self.ch4_trig_cbx.currentText()
         # print(ch4_trig)
         if ch4_trig == "Positive":
@@ -347,19 +347,62 @@ class MyWindow(asg_cw_odmr_ui.Ui_Form, QWidget):
             # print(rtn)
             if rtn == 0:
                 self.ft_info_msg.emit("CH4 input edge is setted to: {}".format(ch4_trig))
-                self.ft_info_msg.emit("-"*60)
             else:
                 self.ft_info_msg.emit("Setting CH4 input edge failed.")
-                self.ft_info_msg.emit("-"*60)
         elif ch4_trig == "Negative":
             rtn = self.dev.SetStopEdge(DEV_ID_0, 0, FTMT_CHANNEL_3, FT10X0_INPUT_EDGE_FALL)
             # print(rtn)
             if rtn == 0:
                 self.ft_info_msg.emit("CH4 input edge is setted to: {}".format(ch4_trig))
-                self.ft_info_msg.emit("-"*60)
             else:
                 self.ft_info_msg.emit("Setting CH4 input edge failed.")
-                self.ft_info_msg.emit("-"*60)
+        
+        '''Setting SYNC input threshold'''
+        sync_thresh_str = self.sync_thresh_ledit.text()
+        self.sync_thresh = ctypes.c_int(int(sync_thresh_str))
+        rtn = self.dev.SetStartThreshold(DEV_ID_0, FTMT_BOARD_A, self.sync_thresh)
+        if rtn == 0:
+            self.ft_info_msg.emit("SYNC input threshold is setted to: {}".format(sync_thresh_str))
+        else:
+            self.ft_info_msg.emit("Setting SYNC input threshold failed.")
+        
+        '''Setting CH1 input threshold'''
+        ch1_thresh_str = self.ch1_thresh_ledit.text()
+        self.ch1_thresh = ctypes.c_int(int(ch1_thresh_str))
+        rtn = self.dev.SetStopThreshold(DEV_ID_0, FTMT_BOARD_A, FTMT_CHANNEL_0, self.ch1_thresh)
+        if rtn == 0:
+            self.ft_info_msg.emit("CH1 input threshold is setted to: {}".format(ch1_thresh_str))
+        else:
+            self.ft_info_msg.emit("Setting CH1 input threshold failed.")
+
+        '''Setting CH2 input threshold'''
+        ch2_thresh_str = self.ch2_thresh_ledit.text()
+        self.ch2_thresh = ctypes.c_int(int(ch2_thresh_str))
+        rtn = self.dev.SetStopThreshold(DEV_ID_0, FTMT_BOARD_A, FTMT_CHANNEL_1, self.ch2_thresh)
+        if rtn == 0:
+            self.ft_info_msg.emit("CH2 input threshold is setted to: {}".format(ch2_thresh_str))
+        else:
+            self.ft_info_msg.emit("Setting CH2 input threshold failed.")
+
+        '''Setting CH3 input threshold'''
+        ch3_thresh_str = self.ch3_thresh_ledit.text()
+        self.ch3_thresh = ctypes.c_int(int(ch3_thresh_str))
+        rtn = self.dev.SetStopThreshold(DEV_ID_0, FTMT_BOARD_A, FTMT_CHANNEL_2, self.ch3_thresh)
+        if rtn == 0:
+            self.ft_info_msg.emit("CH3 input threshold is setted to: {}".format(ch3_thresh_str))
+        else:
+            self.ft_info_msg.emit("Setting CH3 input threshold failed.")
+
+        '''Setting CH4 input threshold'''
+        ch4_thresh_str = self.ch4_thresh_ledit.text()
+        self.ch4_thresh = ctypes.c_int(int(ch4_thresh_str))
+        rtn = self.dev.SetStopThreshold(DEV_ID_0, FTMT_BOARD_A, FTMT_CHANNEL_3  , self.ch4_thresh)
+        if rtn == 0:
+            self.ft_info_msg.emit("CH4 input threshold is setted to: {}".format(ch4_thresh_str))
+        else:
+            self.ft_info_msg.emit("Setting CH4 input threshold failed.")
+
+        self.ft_info_msg.emit('-'*60)
 
     def ft_smp_ld(self):
 
@@ -704,25 +747,40 @@ class MyWindow(asg_cw_odmr_ui.Ui_Form, QWidget):
             self.max_btn.setIcon(self.max_icon)
 
     def mousePressEvent(self, event):
+
         if event.button() == Qt.LeftButton:
             self.m_flag = True
             self.m_Position = QPoint
             self.m_Position = event.globalPos() - self.pos()  # 获取鼠标相对窗口的位置
             event.accept()
             self.setCursor(QCursor(Qt.OpenHandCursor))  # 更改鼠标图标
-
-    def mouseMoveEvent(self, QMouseEvent):
         
-        self.m_flag = True
-        if Qt.LeftButton and self.m_flag:
-            
-            self.move(QMouseEvent.globalPos() - self.m_Position)  # 更改窗口位置
-            QMouseEvent.accept()
+    def mouseMoveEvent(self, QMouseEvent):
+        m_position = QPoint
+        m_position = QMouseEvent.globalPos() - self.pos()
+        width = QDesktopWidget().availableGeometry().size().width()
+        height = QDesktopWidget().availableGeometry().size().height()
+        if m_position.x() < width*0.7 and m_position.y() < height*0.06:
+            self.m_flag = True
+            if Qt.LeftButton and self.m_flag:                
+                pos_x = int(self.m_Position.x())
+                pos_y = int(self.m_Position.y())
+                if pos_x < width*0.7 and pos_y < height*0.06:           
+                    self.move(QMouseEvent.globalPos() - self.m_Position)  # 更改窗口位置
+                    QMouseEvent.accept()
 
     def mouseReleaseEvent(self, QMouseEvent):
         self.m_flag = False
         self.setCursor(QCursor(Qt.ArrowCursor))
+    def eventFilter(self, object, event):
 
+        if event.type() == QEvent.HoverMove:
+            print('鼠标在按钮上')
+            return True
+        elif event.type() == QEvent.MouseMove:
+            print('按钮被点击')
+            return True
+        return False
     '''
     RF CONTROL
     '''
@@ -901,23 +959,10 @@ class MyWindow(asg_cw_odmr_ui.Ui_Form, QWidget):
                 self.rf_info_msg.emit('RF OFF failed')
                 sys.emit()
     
-
-
-
-
-
-
-
-
-
-
-
     '''
     ASG CONTROL
     '''
     
-
-
 
 if __name__ == '__main__':
 
