@@ -772,15 +772,7 @@ class MyWindow(asg_cw_odmr_ui.Ui_Form, QWidget):
     def mouseReleaseEvent(self, QMouseEvent):
         self.m_flag = False
         self.setCursor(QCursor(Qt.ArrowCursor))
-    def eventFilter(self, object, event):
 
-        if event.type() == QEvent.HoverMove:
-            print('鼠标在按钮上')
-            return True
-        elif event.type() == QEvent.MouseMove:
-            print('按钮被点击')
-            return True
-        return False
     '''
     RF CONTROL
     '''
