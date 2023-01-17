@@ -837,7 +837,7 @@ class MyWindow(asg_cw_odmr_ui.Ui_Form, QWidget):
         
         # Boot RF generator
         self.rf_port = self.rf_cbx.currentText()
-        print(self.rf_port)
+        # print(self.rf_port)
         self.my_instrument = self.rm.open_resource(self.rf_port)
         self.my_instrument.write_termination = '\n'
         self.instrument_info = self.my_instrument.query('*IDN?')

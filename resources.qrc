@@ -1,5 +1,7 @@
 <RCC>
   <qresource prefix="my_icons">
+    <file>images/icons/plot.svg</file>
+    <file>images/icons/transform.svg</file>
     <file>images/icons/enable.svg</file>
     <file>images/icons/picture.svg</file>
     <file>images/icons/open_folder.svg</file>
