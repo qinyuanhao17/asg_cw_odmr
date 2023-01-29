@@ -13,7 +13,7 @@ from ft1040_SDK import *
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from PyQt5.QtGui import QIcon, QPixmap, QCursor, QMouseEvent, QColor, QFont
 from PyQt5.QtCore import Qt, pyqtSignal, QPoint, QEvent
-from PyQt5.QtWidgets import QWidget, QApplication, QGraphicsDropShadowEffect, QVBoxLayout, QLabel, QFileDialog, QDesktopWidget
+from PyQt5.QtWidgets import QWidget, QApplication, QGraphicsDropShadowEffect, QFileDialog, QDesktopWidget
 
 class MyWindow(asg_cw_odmr_ui.Ui_Form, QWidget):
 
@@ -952,7 +952,7 @@ class MyWindow(asg_cw_odmr_ui.Ui_Form, QWidget):
                 sys.emit()
     
     '''
-    ASG CONTROL
+    Data analysis
     '''
     
 

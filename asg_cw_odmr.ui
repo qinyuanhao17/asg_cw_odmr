@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1496</width>
-    <height>946</height>
+    <width>1551</width>
+    <height>929</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -1282,7 +1282,7 @@ QPushButton:pressed {
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>681</width>
+                          <width>709</width>
                           <height>85</height>
                          </rect>
                         </property>
@@ -1462,8 +1462,8 @@ QPushButton:pressed {
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>681</width>
-                          <height>100</height>
+                          <width>709</width>
+                          <height>85</height>
                          </rect>
                         </property>
                         <layout class="QVBoxLayout" name="verticalLayout_7">
@@ -1560,6 +1560,12 @@ QPushButton:pressed {
                          <property name="icon">
                           <iconset resource="resources.qrc">
                            <normaloff>:/my_icons/images/icons/download.svg</normaloff>:/my_icons/images/icons/download.svg</iconset>
+                         </property>
+                         <property name="iconSize">
+                          <size>
+                           <width>20</width>
+                           <height>30</height>
+                          </size>
                          </property>
                         </widget>
                        </item>
@@ -1739,7 +1745,7 @@ QPushButton:pressed {
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>681</width>
+                             <width>708</width>
                              <height>85</height>
                             </rect>
                            </property>
