@@ -5,15 +5,15 @@ import platform
 import struct
 import socket
 import pyvisa
-import numpy as np
-import matplotlib.pyplot as plt
 import asg_cw_odmr_ui
+import pandas as pd
+import numpy as np
+import pyqtgraph as pg
 from threading import Thread
 from ft1040_SDK import *
-from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from PyQt5.QtGui import QIcon, QPixmap, QCursor, QMouseEvent, QColor, QFont
 from PyQt5.QtCore import Qt, pyqtSignal, QPoint, QEvent
-from PyQt5.QtWidgets import QWidget, QApplication, QGraphicsDropShadowEffect, QFileDialog, QDesktopWidget
+from PyQt5.QtWidgets import QWidget, QApplication, QGraphicsDropShadowEffect, QFileDialog, QDesktopWidget, QVBoxLayout
 
 class MyWindow(asg_cw_odmr_ui.Ui_Form, QWidget):
 
@@ -21,6 +21,7 @@ class MyWindow(asg_cw_odmr_ui.Ui_Form, QWidget):
     ft_info_msg = pyqtSignal(str)
     ft_ply_btn_msg = pyqtSignal(str)
     ft_progressBar_msg = pyqtSignal(int)
+    data_processing_info_msg = pyqtSignal(str)
 
     def __init__(self):
 
@@ -28,7 +29,7 @@ class MyWindow(asg_cw_odmr_ui.Ui_Form, QWidget):
 
         # init UI
         self.setupUi(self)
-        self.ui_width = int(QDesktopWidget().availableGeometry().size().width()*0.75)
+        self.ui_width = int(QDesktopWidget().availableGeometry().size().width()*0.85)
         self.ui_height = int(QDesktopWidget().availableGeometry().size().height()*0.72)
         self.resize(self.ui_width, self.ui_height)
         center_pointer = QDesktopWidget().availableGeometry().center()
@@ -72,7 +73,19 @@ class MyWindow(asg_cw_odmr_ui.Ui_Form, QWidget):
 
         # Check FT1040connection
         self.check_ft_connection()
-        
+
+        '''
+        Data processing init
+        '''
+
+        #Init ui
+        self.data_processing_info_ui()
+
+        #Init signal
+        self.data_pro_signal()
+
+        # Init plot ui
+        self.plot_ui_init()
     '''
     FT1040 control
     '''    
@@ -954,8 +967,142 @@ class MyWindow(asg_cw_odmr_ui.Ui_Form, QWidget):
     '''
     Data analysis
     '''
-    
+    def data_pro_signal(self):
 
+        # List load button signal
+        self.load_list_btn.clicked.connect(self.list_load)
+        # Message signal
+        self.data_processing_info_msg.connect(self.data_processing_slot)
+        # Scroll area updating signal
+        self.data_processing_scroll.verticalScrollBar().rangeChanged.connect(
+            lambda: self.data_processing_scroll.verticalScrollBar().setValue(
+                self.data_processing_scroll.verticalScrollBar().maximum()
+            )
+        )
+        # Data load button signal
+        self.load_data_btn.clicked.connect(self.data_load)
+        # Data transform button
+        self.transform_btn.clicked.connect(self.result_transform)
+        self.save_result_btn.clicked.connect(self.save_final_rersult)
+        # Open transformed data folder signal
+        self.open_transformed_data_folder_btn.clicked.connect(self.open_final_result_folder)
+        # Import plot data signal
+        self.import_transformed_data_btn.clicked.connect(self.import_plot_data)
+        # plot signal
+        self.plot_data_btn.clicked.connect(self.plot_result)
+        # Restore view signal
+        self.restore_view_btn.clicked.connect(self.restore_view)
+
+    def data_processing_info_ui(self):
+
+        self.data_processing_msg.setWordWrap(True)  # 自动换行
+        self.data_processing_msg.setAlignment(Qt.AlignTop)  # 靠上
+
+        # # 用于存放消息
+        self.data_processing_msg_history = []
+
+    def data_processing_slot(self, msg):
+
+        # print(msg)
+        self.data_processing_msg_history.append(msg)
+        self.data_processing_msg.setText("<br>".join(self.data_processing_msg_history))
+        self.data_processing_msg.resize(700, self.data_processing_msg.frameSize().height() + 20)
+        self.data_processing_msg.repaint()  # 更新内容，如果不更新可能没有显示新内容
+
+    def list_load(self):
+        sweepListFilePath, _  = QFileDialog.getOpenFileName(
+            self,             # 父窗口对象
+            "Load Sweep List for Analysis", # 标题
+            r"d:",        # 起始目录
+            "File type (*.csv *.txt)" # 选择类型过滤项，过滤内容在括号中
+        )
+        self.sweep_list_for_analysis = pd.read_csv(sweepListFilePath, index_col=0)
+        self.analysis_list = self.sweep_list_for_analysis.drop(labels=0,axis=0)
+        self.data_processing_info_msg.emit('Sweep list for analysis loaded: {}'.format(sweepListFilePath))
+        self.data_processing_info_msg.emit("-"*60)
+    def data_load(self):
+        dataFilePath, _  = QFileDialog.getOpenFileName(
+            self,             # 父窗口对象
+            "Load Data for Analysis", # 标题
+            r"d:",        # 起始目录
+            "File type (*.csv *.txt)" # 选择类型过滤项，过滤内容在括号中
+        )
+        cw_odmr_result = pd.read_table(dataFilePath, skiprows=10, header=0)
+        intensity_result = cw_odmr_result['Sync']
+        self.v_counts = intensity_result.value_counts(sort=False)
+        self.data_processing_info_msg.emit('Data for analysis loaded: {}'.format(dataFilePath))
+        self.data_processing_info_msg.emit("-"*60)
+    def result_transform(self):
+        data_points = self.sweep_list_for_analysis.shape[0]
+        intensity_counts = []
+        for i in range(1,data_points):
+            if i in self.v_counts.index.values:
+                intensity_counts.append(self.v_counts.loc[i])
+            else:
+                intensity_counts.append(0)
+        self.analysis_list.insert(self.analysis_list.shape[1],'Intensity', np.array(intensity_counts))
+        self.final_result = self.analysis_list.sort_index()
+        print(self.final_result.shape)
+        self.data_processing_info_msg.emit('Final result transform succeeded.')
+        self.data_processing_info_msg.emit("-"*60)
+
+    def save_final_rersult(self):
+        self.finalResultFilePath = QFileDialog.getExistingDirectory(
+                        self,             # 父窗口对象
+                        "Choose Final Result File Path", # 标题
+                        r"d:"        # 起始目录
+                    )
+        self.final_result.to_csv('{}/final_result.csv'.format(self.finalResultFilePath))
+        self.data_processing_info_msg.emit('Final result for analysis saved: {}'.format(self.finalResultFilePath))
+        self.data_processing_info_msg.emit("-"*60)
+        self.transformed_data_ledit.setText(self.finalResultFilePath)  
+
+    def open_final_result_folder(self):
+        os.startfile(self.finalResultFilePath)
+    
+    def import_plot_data(self):
+        dataFilePath, _  = QFileDialog.getOpenFileName(
+            self,             # 父窗口对象
+            "Load Plot Data", # 标题
+            r"d:/ODMRequipment",        # 起始目录
+            "File type (*.csv *.txt)" # 选择类型过滤项，过滤内容在括号中
+        )
+        plot_data = pd.read_csv(dataFilePath, index_col=0)
+        self.freq_data = []
+        for items in plot_data['Freq']:
+            self.freq_data.append(float(items[:-4]))
+        self.inten_data = list(plot_data['Intensity'])
+        self.data_processing_info_msg.emit('Final result imported: {}'.format(dataFilePath))
+        self.data_processing_info_msg.emit("-"*60)
+        
+    def plot_ui_init(self):
+        # Add pyqtGraph plot widget
+        
+        self.cw_odmr_plot = pg.PlotWidget(enableAutoRange=True)
+        graph_widget_layout = QVBoxLayout()
+        graph_widget_layout.addWidget(self.cw_odmr_plot)
+        self.graph_frame.setLayout(graph_widget_layout)
+        self.cw_odmr_plot.setLabel("left","Intensity (Counts)")
+        self.cw_odmr_plot.setLabel("bottom","RF Frequency (MHz)")
+        self.cw_odmr_plot.setTitle('CW-ODMR', color='k')
+        self.cw_odmr_plot.setBackground(background=None)
+        self.cw_odmr_plot.getAxis('left').setPen('k')
+        self.cw_odmr_plot.getAxis('left').setTextPen('k')
+        self.cw_odmr_plot.getAxis('bottom').setPen('k')
+        self.cw_odmr_plot.getAxis('bottom').setTextPen('k')
+        self.cw_odmr_plot.getAxis('top').setPen('k')
+        self.cw_odmr_plot.getAxis('right').setPen('k')
+        self.cw_odmr_plot.showAxes(True)
+        self.cw_odmr_plot.showGrid(x=True, y=True)
+    
+    def restore_view(self):
+        self.cw_odmr_plot.getPlotItem().enableAutoRange()
+        
+    def plot_result(self):
+
+        curve = self.cw_odmr_plot.plot(pen=pg.mkPen(color=(255,85,48), width=2))
+        curve.setData(self.freq_data, self.inten_data)
+    
 if __name__ == '__main__':
 
     app = QApplication(sys.argv)
