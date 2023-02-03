@@ -4,8 +4,8 @@ This application is designed, not restricted, to do Continues Wave Optically Det
 
 ## Features
 
-- A single photon detector module based on Simnics FT1040.
-- A RIGOL DSG836 RF generator contol module.
+- A single photon detector module based on **Simnics FT1040**.
+- A **RIGOL DSG836** RF generator contol module.
 - A data processing module dealing and visualizing measured data.
 - A RF sweep list generator code in Jupyter Notebook to generate a random sweep list, in order to avoid MW frequency mitigating problems caused by frequency-dependent MW heating through the antenna resonance
 
