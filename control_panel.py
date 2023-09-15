@@ -29,8 +29,8 @@ class MyWindow(asg_cw_odmr_ui.Ui_Form, QWidget):
 
         # init UI
         self.setupUi(self)
-        self.ui_width = int(QDesktopWidget().availableGeometry().size().width()*0.85)
-        self.ui_height = int(QDesktopWidget().availableGeometry().size().height()*0.72)
+        self.ui_width = int(QDesktopWidget().availableGeometry().size().width()*0.65)
+        self.ui_height = int(QDesktopWidget().availableGeometry().size().height()*0.65)
         self.resize(self.ui_width, self.ui_height)
         center_pointer = QDesktopWidget().availableGeometry().center()
         x = center_pointer.x()

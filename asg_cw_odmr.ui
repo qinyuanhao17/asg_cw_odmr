@@ -187,7 +187,7 @@ QComboBox{
             <item>
              <widget class="QLabel" name="label_6">
               <property name="text">
-               <string>----Version 1.0</string>
+               <string>----Version 1.0 --By Qin Yuanhao</string>
               </property>
              </widget>
             </item>
@@ -1299,7 +1299,7 @@ QPushButton:pressed {
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>663</width>
+                          <width>656</width>
                           <height>85</height>
                          </rect>
                         </property>
@@ -1479,7 +1479,7 @@ QPushButton:pressed {
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>663</width>
+                          <width>656</width>
                           <height>85</height>
                          </rect>
                         </property>
@@ -1851,7 +1851,7 @@ QPushButton:pressed {
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>805</width>
+                             <width>812</width>
                              <height>85</height>
                             </rect>
                            </property>
@@ -1895,7 +1895,7 @@ QPushButton:pressed {
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="file_ck_group"/>
   <buttongroup name="stp_mode_ck_group"/>
+  <buttongroup name="file_ck_group"/>
  </buttongroups>
 </ui>
